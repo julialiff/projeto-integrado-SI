@@ -1,0 +1,97 @@
+version: 2.1 # Use 2.1 to enable using orbs and other features.
+
+# Declare the orbs that we'll use in our config.
+# read more about orbs: https://circleci.com/docs/2.0/using-orbs/
+orbs:
+  ruby: circleci/ruby@1.0
+  node: circleci/node@2
+  aws-code-deploy: circleci/aws-code-deploy@0.0.11
+
+
+jobs:
+  build: # "build" job
+    docker:
+      - image: cimg/ruby:2.7.1-node # define imagem do docker que será usada para o ruby
+        environment: #configurações de ambiente 
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+
+      - image: circleci/postgres:9.6.2-alpine # define imagem do docker que será usada para o postgres
+        environment: # configurações de ambiente
+          RAILS_ENV: test
+          POSTGRES_USER: root
+          POSTGRES_DB: projetosi-test
+
+    steps:
+      - checkout # pull código do git.
+      - ruby/install-deps # instala dependências usando orb do ruby
+      - node/install-packages: # instala pacotes yarn necessários
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+      # Setup do database
+      # - run: bundle exec rake db:create
+      # - run: bundle exec rake db:structure:load --trace
+
+      # Roda Rspec
+      # - type: shell
+        # command: |
+          # bundle exec rspec
+
+  test:  # job "test"
+    parallelism: 3
+    docker:
+      - image: cimg/ruby:2.7.1-node # imagem primária do docker, onde os comandos rodarão.
+      - image: circleci/postgres:9.5-alpine # imagem do postgres
+        environment: # variáveis de ambiente do db
+          POSTGRES_USER: root
+          POSTGRES_DB: projetosi-test
+          POSTGRES_PASSWORD: ""
+    # variáveis de ambiente do Ruby/Rails, aplicados ao container primário.
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: root
+      PGPASSWORD: ""
+      RAILS_ENV: test
+    # Steps necessários, similares ao do "build".
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+      # Here we make sure that the secondary container boots
+      # up before we run operations on the database.
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: |
+            RAILS_ENV=test bundle exec rake db:create
+            bundle exec rake db:setup          
+            # bundle exec rails db:schema:load --trace
+            # bundle exec rake db:migrate
+            # bundle exec rake db:structure:load
+      # Run rspec in parallel
+      - ruby/rspec-test
+
+# We use workflows to orchestrate the jobs that we declared above.
+workflows:
+  version: 2
+  build_and_test:     # The name of our workflow is "build_and_test"
+    jobs:             # The list of jobs we run as part of this workflow.
+      - build         # Run build first.
+      - test:         # Then run test,
+          requires:   # Test requires that build passes for it to run.
+            - build   # Finally, run the build job.
+  # deploy_application:
+  #   jobs:
+  #     - aws-code-deploy/deploy:
+  #         application-name: projetosi
+  #         deployment-group: Production
+  #         service-role-arn: arn:aws:iam::430050738098:role/codedeploy-projeto-si
+          # bundle-bucket: myApplicationS3Bucket
+          # bundle-key: myS3BucketKey

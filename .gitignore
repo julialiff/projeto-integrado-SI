@@ -43,4 +43,7 @@ yarn-debug.log*
 # Ignore DS_store files when using mac
 .DS_Store
 
-*.yml
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

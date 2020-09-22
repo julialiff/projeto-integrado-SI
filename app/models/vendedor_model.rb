@@ -1,0 +1,2 @@
+class VendedorModel < ApplicationRecord
+end

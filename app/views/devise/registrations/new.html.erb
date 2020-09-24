@@ -34,7 +34,7 @@
 
 <div class="field">
     <%= f.label :data_nascimento %>
-    <%= f.date_select :data_nascimento %>
+    <%= f.date_select :data_nascimento, :order => [:day, :month, :year], default: { day: 01, month:01, year:1990 }, :start_year=>1950,:end_year=>2010 %>
 </div>
 
 <div class="field">

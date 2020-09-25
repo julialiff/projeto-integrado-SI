@@ -6,7 +6,7 @@ Versão Ruby: **2.7.1**
 
 Versão Rails: **6.0.3.2**
 
-Banco de dados: **sqlite3**
+Banco de dados: **postgreSQL**
 
 Inicializar servidor: `rails s`
 

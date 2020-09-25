@@ -37,6 +37,33 @@ ActiveRecord::Schema.define(version: 2020_09_21_010023) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password"
+    t.integer "role_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_users_on_role_id"
+  end
+
+  create_table "usersmodels", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.integer "cpf"
+    t.integer "senha"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "vendedor_models", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -51,4 +78,5 @@ ActiveRecord::Schema.define(version: 2020_09_21_010023) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "users", "roles"
 end

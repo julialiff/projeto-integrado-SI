@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			<%= stylesheet_link_tag 'welcome.scss' %>
+		</style>
+	</head>
+
+<!-- -->
+	<body>
+		<header></header>
+		<nav>
+			<a href=""> <div>Cadastro</div> </a>
+			<a href=""> <div>Login</div> </a>
+		</nav>
+		<section>
+			<div>
+				<h1 class="teste1">MarketPlace de Máscaras</h1>
+				<p> este é um site para comércio de máscaras </p>
+			</div>
+		</section>
+		<footer></footer>
+	</body>
+</html>

@@ -1,91 +1,31 @@
-*{
+* {
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
 }
 
-
-
 nav {
-        display: flex;
-        justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 nav div{
-        margin: 3px;
-        padding: 5px;
-        border: 1px dashed black;
+	margin: 3px;
+	padding: 5px;
+	border: 1px dashed black;
 }
 
 .teste1 {
-        /* color: yellow; */
-        /* background-color: green; */
-        font-weight: bold;
+	/* color: yellow; */
+	/* background-color: green; */
+	font-weight: bold;
+}
+
+body {
+	/* background-color: blue; */
+	margin: 5px;
 }
 
 section div h1{
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
-}
-
-
-
-
-body{
-    font-family: 'Poppins', sans-serif;
-    margin: 5px;
-}
-.small-container{
-	max-width: 1080px;
-	margin: auto;
-	padding-left: 25px;
-	padding-right: 25px;
-}
-.row{
 	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-	justify-content: space-around;
-}
-.col-3{
-    flex-basis: 30px;
-    min-width: 250px;
-    margin-bottom: 30px;
-	transition: transform 0.5s;
-}
-.col-3 img{
-    width: 75%;
-}
-.title{
-	text-align: center;
-	margin: 0 auto 80;
-	position: relative;
-	line-height: 60px;
-	color: #555;
-}
-.title::after{
-	content: '';
-	background: #ff523b;
-	width: 80px;
-	height: 5px;
-	border-radius: 5px;
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
-        margin-bottom: 10px;
-}
-h4{
-	color: #555;
-	font-weight: normal;
-}
-.col-3 p{
-	font-size: 14px;
-}
-.rating .fa{
-	color: #ff523b;
-}
-.col-3:hover{
-	transform: translateY(-5px);
+	justify-content: center;
 }

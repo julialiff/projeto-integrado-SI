@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+jasny/jasny-bootstrap.min.js
 
 //= require jquery3
 //= popper

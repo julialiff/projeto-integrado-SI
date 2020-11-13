@@ -8,30 +8,35 @@
 
           <div class="form-group">
             <%= f.label :email, 'E-mail', class: 'form-text' %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'email@exemplo.com' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'email@exemplo.com', required: true %>
           </div>
 
           <div class="form-group">
             <%= f.label :nome, 'Nome', class: 'form-text' %>
-            <%= f.text_field :nome, autocomplete: "name", class: 'form-control', placeholder: 'Nome'%>
+            <%= f.text_field :nome, autocomplete: "name", class: 'form-control', placeholder: 'Nome', required: true %>
           </div>
 
           <div class="form-group">
             <%= f.label :documento, 'CPF', class: 'form-text' %>
-            <%= f.text_field :documento, autocomplete: "cpf", class: 'form-control', placeholder: '123.456.789-10', required: true, data: {mask: '000.000.000-00'} %>
+            <%= f.text_field :documento, autocomplete: "cpf", class: 'form-control', placeholder: '123.456.789-10', required: true, 'data-mask': '000.000.000-00' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :data_nascimento, 'Data de Nascimento', class: 'form-text' %>
+            <%= f.text_field :data_nascimento, autocomplete: "birthday", class: 'form-control', placeholder: '01/01/1990', required: true %>
           </div>
 
           <div class="form-group">
             <%= f.label :password, 'Senha', class: 'form-text' %>
             <% if @minimum_password_length %>
-            <em>no mínimo (<%= @minimum_password_length %> caracteres)</em>
+              <em>no mínimo (<%= @minimum_password_length %> caracteres)</em>
             <% end %>
-            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: 'Senha' %>
+            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: 'Senha', required: true %>
           </div>
 
           <div class="form-group">
             <%= f.label :password_confirmation, 'Confirmação da senha', class: 'form-text' %>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password",class: 'form-control', placeholder: 'Repetir senha' %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password",class: 'form-control', placeholder: 'Repetir senha', required: true %>
           </div>
 
           <div class="actions">

@@ -1,16 +1,58 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item mr-sm-2">
             <h2><%= link_to "SóMáscaras", :root, class: "site-name" %></h2>
         </li>
+
+        <li class="nav-item dropdown" style="margin-left:20px;">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Categorias
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Máscaras</a>
+              <a class="dropdown-item" href="#">Faceshield</a>
+              <a class="dropdown-item" href="#">Álcool em gel</a>
+            </div>
+          </li>
     </ul>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item ">
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+        <ul class="navbar-nav ml-auto" style="margin-right:80px">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-shopping-cart fa-sm mx-2"></i>
+                    Carrinho
+                </a>
+            </li>
             <% if user_signed_in? %>
-            <button class="btn btn-sm btn-outline-primary" type="button"><%= link_to "Sair", :destroy_user_session_path, method: :delete %></button>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Minha conta
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user-cog fa-sm mx-2"></i>
+                            Configurações
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-box-open fa-sm mx-2"></i>
+                            Meus pedidos
+                        </a>
+                        
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-sign-out-alt fa-sm mx-2"></i>
+                            Sair
+                        </a>
+
+
+
+                    </div>
+                    <!-- <button class="btn btn-sm btn-outline-primary" type="button"><%= link_to "Sair", :destroy_user_session, method: :delete %></button> -->
+                </li>
             <% else %>
-                <button class="btn btn-sm btn-outline-primary" type="button"><%= link_to "Login", :login %></button>
+                <li class="nav-item">
+                    <button class="btn btn-sm btn-outline-primary" type="button"><%= link_to "Login", :login %></button>
+                </li>
             <% end %>
-        </li>
-    </ul>
+        </ul>
+    <!-- </div> -->
 </nav>

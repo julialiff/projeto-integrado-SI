@@ -7,7 +7,11 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("jquery")
+require("jquery-mask-plugin")
 jasny/jasny-bootstrap.min.js
+
+import "@fortawesome/fontawesome-free/js/all";
 
 //= require jquery3
 //= popper
@@ -19,3 +23,4 @@ jasny/jasny-bootstrap.min.js
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+$.jMaskGlobals.watchDataMask = true;

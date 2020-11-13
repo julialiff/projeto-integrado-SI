@@ -12,6 +12,10 @@
  *
  */
 @import "bootstrap";
+// @import '@fortawesome/fontawesome-free';
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 
 a.site-name {
     color: white;
@@ -76,4 +80,8 @@ em {
 .form-text{
     font-size: 14px;
     font-weight: bold;
+}
+
+.navbar-dark .navbar-nav .nav-link  {
+    color: #FFF;
 }

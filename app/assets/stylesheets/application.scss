@@ -1,0 +1,93 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+@import "bootstrap";
+// @import '@fortawesome/fontawesome-free';
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+
+a.site-name {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+a:hover.site-name {
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav div{
+    margin: 3px;
+    padding: 5px;
+    border: 1px dashed black;
+}
+
+.form-box {
+    margin-top: 50px;
+}
+
+.divider-break {
+    text-align: center;
+    position: relative;
+    top: 2px;
+    padding-top: 1px;
+    margin-bottom: 14px;
+    line-height: 1;
+    
+}
+
+h5 {
+    line-height: 1;
+    font-size: 12px;
+    color: #767676;
+    font-weight: 400;
+    z-index: 2;
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    padding: 0 8px 0 7px;
+}
+
+.forgot-password {
+    font-size: 12px;
+}
+
+.btn-center {
+    position: relative;
+    text-align: center;
+}
+
+em {
+    font-size: 12px;
+}
+
+.form-text{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.navbar-dark .navbar-nav .nav-link  {
+    color: #FFF;
+    font-size: 15px;
+}
+
+.dropdown-item {
+    font-size: 15px
+}

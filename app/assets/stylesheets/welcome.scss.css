@@ -4,38 +4,16 @@
         box-sizing: border-box;
 }
 
-
-
-nav {
-        display: flex;
-        justify-content: flex-end;
-}
-
-nav div{
-        margin: 3px;
-        padding: 5px;
-        border: 1px dashed black;
-}
-
-.teste1 {
-        /* color: yellow; */
-        /* background-color: green; */
-        font-weight: bold;
-}
-
 section div h1{
         display: flex;
         justify-content: center;
         margin-bottom: 10px;
 }
 
-
-
-
 body{
     font-family: 'Poppins', sans-serif;
-    margin: 5px;
 }
+
 .small-container{
         max-width: 1080px;
         margin: auto;

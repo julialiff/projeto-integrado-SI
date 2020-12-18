@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Cadastro atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -69,6 +69,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:is_admin, :nome, :documento, :data_nascimento, :endereco)
+      params.require(:user).permit(:email, :is_admin, :nome, :documento, :data_nascimento, :endereco)
     end
 end

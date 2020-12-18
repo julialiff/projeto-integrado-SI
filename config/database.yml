@@ -19,10 +19,13 @@ development:
   port: 5432
   encoding: unicode
 
-# test:
-#   <<: *default
-#   database: projetosi-test
-#   host:     localhost
+test:
+  <<: *default
+  database: projetosi-test
+  username: root
+  password: root
+  port: 5432
+  encoding: unicode
 
 # production:
 #   <<: *default

@@ -21,6 +21,7 @@ a.site-name {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    font-size: 30px;
 }
 
 a:hover.site-name {
@@ -84,4 +85,9 @@ em {
 
 .navbar-dark .navbar-nav .nav-link  {
     color: #FFF;
+    font-size: 15px;
+}
+
+.dropdown-item {
+    font-size: 15px
 }

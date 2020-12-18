@@ -23,7 +23,7 @@
 
           <div class="form-group">
             <%= f.label :data_nascimento, 'Data de Nascimento', class: 'form-text' %>
-            <%= f.text_field :data_nascimento, autocomplete: "birthday", class: 'form-control', placeholder: '01/01/1990', required: true %>
+            <%= f.date_field :data_nascimento, autocomplete: "birthday", class: 'form-control', placeholder: '01/01/1990', required: true, value: Date.today.strftime("%d-%m-%Y") %>
           </div>
 
           <div class="form-group">

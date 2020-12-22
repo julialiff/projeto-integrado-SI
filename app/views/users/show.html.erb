@@ -1,29 +1,73 @@
-<p id="notice"><%= notice %></p>
+<div class="container dados-usuario-container">
+  <div class="row justify-content-left">
+    <div class="col col-2 align-self-left">
 
-<p>
-  <strong>Is admin:</strong>
-  <%= @user.is_admin %>
-</p>
+      <!-- A vertical navbar -->
+      <nav class="navbar bg-light nav-vertical">
 
-<p>
-  <strong>Nome:</strong>
-  <%= @user.nome %>
-</p>
+        <!-- Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Meus dados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Editar dados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Meus endereços</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Meus pedidos</a>
+          </li>
+        </ul>
 
-<p>
-  <strong>Documento:</strong>
-  <%= @user.documento %>
-</p>
+      </nav> 
+    </div>
 
-<p>
-  <strong>Data nascimento:</strong>
-  <%= @user.data_nascimento %>
-</p>
 
-<p>
-  <strong>Endereco:</strong>
-  <%= @user.endereco %>
-</p>
+    <div class="col col-10 align-self-left">
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+      <div class="container dados-usuario-container">
+        <div class="row justify-content-center">
+          <div class="col col-6 align-self-center">
+            <h2>Meus dados</h2>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col col-6 align-self-center dados-usuario">
+            <strong>Nome:</strong></br />
+            <%= @user.nome %>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col col-6 align-self-center dados-usuario">
+            <strong>Email:</strong><br />
+            <%= @user.email %>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col col-6 align-self-center dados-usuario">
+            <strong>Documento:</strong><br />
+            <%= mascara_documento(@user.documento) %>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col col-6 align-self-center dados-usuario">
+            <strong>Data nascimento:</strong><br />
+            <%= @user.data_nascimento %>
+          </div>
+        </div>
+
+        <!-- <div class="row justify-content-center">
+          <div class="col col-6 align-self-center dados-usuario">
+            <%#= link_to 'Editar dados', editar_path(@user) %><br />
+            Meus endereços
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

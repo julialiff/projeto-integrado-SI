@@ -91,3 +91,30 @@ em {
 .dropdown-item {
     font-size: 15px
 }
+
+.dados-usuario-container {
+    margin-top: 20px;
+}
+
+.dados-usuario {
+    border: 1px solid rgba(86,61,124,.2);
+    font-size: 12px;
+    padding: 14px;
+}
+
+.login {
+    color: #FFF;
+}
+
+a:hover.login {
+    text-decoration: none;
+    color: #343a40;
+}
+
+.carrinho {
+    margin-top: 5px;
+}
+
+.nav-vertical {
+    margin-top: 67px
+}

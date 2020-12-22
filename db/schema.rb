@@ -10,17 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_020413) do
+ActiveRecord::Schema.define(version: 2020_12_21_160120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "enderecos", force: :cascade do |t|
+    t.string "logradouro"
+    t.string "cep"
+    t.string "bairro"
+    t.string "cidade"
+    t.string "estado"
+    t.string "complemento"
+    t.string "numero"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_enderecos_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.boolean "is_admin"
     t.string "nome"
     t.string "documento"
     t.date "data_nascimento"
-    t.string "endereco"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email", default: "", null: false
@@ -32,4 +45,5 @@ ActiveRecord::Schema.define(version: 2020_09_23_020413) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "enderecos", "users"
 end

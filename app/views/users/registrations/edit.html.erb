@@ -1,6 +1,13 @@
-<div class="container form-box">
+<div class="container form-box dados-usuario-container">
   <div class="row justify-content-center">
-    <div class="col col-4 align-self-center">
+    <div class="col col-6 align-self-center">
+      <%= render partial: "users/partials/navbar" %>
+      <br />
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center">
       <h2>Editar Cadastro</h2>
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -14,49 +21,44 @@
           <div class="form-group">
             <%= f.label :email, class: 'form-text' %>
             <%= f.email_field :email, autocomplete: "email", class: 'form-control', placeholder: 'email@exemplo.com', required: true %>
-
-          </div>
-          
-          <div class="form-group">
-            <%= f.label :documento, 'CPF', class: 'form-text' %>
-            <%= f.text_field :documento, autocomplete: "cpf", class: 'form-control', value: current_user.documento, disabled: true %>
           </div>
 
           <div class="form-group">
-            <%= f.label :data_nascimento, 'Data de Nascimento', class: 'form-text' %>
-            <%= f.text_field :data_nascimento, autocomplete: "birthday", class: 'form-control', required: true, value: current_user.data_nascimento, disabled: true %>
-          </div>
-
-          <div class="field">
-            <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-            <%= f.password_field :password, autocomplete: "new-password" %>
-            <% if @minimum_password_length %>
-              <br />
-              <em><%= @minimum_password_length %> characters minimum</em>
+            <%= f.label :password, class: 'form-text' do %>
+              Senha <i style="font-size:10px;">(deixe em branco se não deseja alterá-la)</i>
             <% end %>
+            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
           </div>
 
           <div class="field">
-            <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            <%= f.label :password_confirmation, 'Confirmação da senha', class: 'form-text' %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
           </div>
 
           <div class="field">
-            <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-            <%= f.password_field :current_password, autocomplete: "current-password" %>
+            <%= f.label :current_password, class: 'form-text' do %>
+              Senha atual <i style="font-size:10px;">(precisamos de sua senha atual para confirmarmos as alterações)</i><br />
+            <% end %>
+            <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
           </div>
 
           <div class="actions">
-            <%= f.submit "Update" %>
+            <br>
+            <%= f.submit "Atualizar", class: 'btn btn-primary btn-block' %>
           </div>
         <% end %>
+        
+        
 
-        <h3>Cancel my account</h3>
+        <div class="hr-divider">
+          <span class="hr-divider-text">
+            Desativar conta?
+          </span>
+        </div>
 
-        <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-        <%= link_to "Back", :back %>
-          
+        <div class="actions" style="margin-bottom: 50px;">
+          <%= button_to "Desativar minha conta", registration_path(resource_name), data: { confirm: "Tem certeza de que deseja desativar sua conta?" }, method: :delete, class:"btn btn-danger btn-block" %>
+        </div>
     </div>
   </div>
 </div>

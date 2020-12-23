@@ -17,7 +17,11 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="#">Meus endereços</a>
+    <% if request.env['PATH_INFO'] == "/meus-enderecos" %>
+      <span class="nav-link active">Meus endereços</span>
+    <% else %>
+      <%= link_to "Meus endereços", meus_enderecos_path, class:"nav-link" %>
+    <% end %>
   </li>
 
   <li class="nav-item">

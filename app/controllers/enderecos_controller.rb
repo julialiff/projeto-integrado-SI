@@ -21,6 +21,15 @@ class EnderecosController < ApplicationController
   def edit
   end
 
+  def enderecos_by_user
+    if current_user
+      @enderecos_user = Endereco.where(user=current_user)
+    else
+      # render :not_found
+      not_found = 404
+    end
+  end
+
   # POST /enderecos
   # POST /enderecos.json
   def create
@@ -71,4 +80,4 @@ class EnderecosController < ApplicationController
     def endereco_params
       params.require(:endereco).permit(:logradouro, :cep, :bairro, :cidade, :estado, :complemento, :numero)
     end
-end
+  end

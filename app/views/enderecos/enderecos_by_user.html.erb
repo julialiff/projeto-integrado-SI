@@ -15,11 +15,50 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
+
+  <div class="row justify-content-center endereco">
     <div class="col col-6 align-self-center">
-      Endereço etc
-      
+      <div class="row row-cols-1 row-cols-md-3 mb-3 text-left">
+        <% if @enderecos %>
+          <% @enderecos.each do |endereco| %>
+            <div class="col col-6 ">
+              <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                  <h4 class="my-0 fw-bold endereco-titulo"><b><%= endereco.nome %></b></h4>
+                </div>
+                <div class="card-body">
+                  <ul class="list-unstyled mt-0 mb-4">
+                    <li><%= endereco.logradouro %>, <%= endereco.numero %></li>
+                    <% if endereco.complemento %>
+                      <li><%= endereco.complemento %></li>
+                    <% end %>
+                    <li><%= endereco.bairro %></li>
+                    <li><%= endereco.cidade %>, <%= endereco.estado %> <%= endereco.cep %></li>
+                  </ul>
+                  <% if endereco.default %>
+                      <i class="fas fa-check fa-sm mx-0"></i> <b>Endereço padrão</b>
+                      <br>
+                      <br>
+                  <% else %>
+                    <br>
+                    <br>
+                  <% end %>
+
+                  <%= link_to "Alterar", editar_endereco_path(id: endereco.id) %> |
+                  <%= link_to "Excluir",  [:endereco, id:endereco.id], data: { confirm: "Tem certeza de que deseja excluir este endereço?" }, method: :delete %>
+                  <% if !endereco.default %>
+                  | 
+                    <%= link_to "Definir como padrão", definir_padrao_path(id: endereco.id) %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          Você ainda não tem nenhum endereço cadastrado
+
+        <% end %>
+      </div>
     </div>
   </div>
-
 </div>

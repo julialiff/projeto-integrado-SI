@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'meus-enderecos', to: 'enderecos#enderecos_by_user'
   get 'novo-endereco', to: 'enderecos#new'
+  get 'editar-endereco', to: 'enderecos#edit'
+  get 'definir_padrao', to: 'enderecos#set_default'
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

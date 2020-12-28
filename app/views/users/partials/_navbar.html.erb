@@ -17,7 +17,7 @@
   </li>
 
   <li class="nav-item">
-    <% if request.env['PATH_INFO'] == "/meus-enderecos" %>
+    <% if request.env['PATH_INFO'] == "/meus-enderecos" || request.env['PATH_INFO'] == '/novo-endereco' || request.env['PATH_INFO'] == 'editar-endereco' %>
       <span class="nav-link active">Meus endereços</span>
     <% else %>
       <%= link_to "Meus endereços", meus_enderecos_path, class:"nav-link" %>

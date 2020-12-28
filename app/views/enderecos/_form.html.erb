@@ -89,7 +89,14 @@
       <div class="col col-6 align-self-left">
         <div class="actions">
           <%# hidden_field(:user_id, value: current_user.id) %>
-          <%= form.submit "Cadastrar Endereço", class: 'btn btn-primary btn-block' %>
+          <% if request.env['PATH_INFO'].include?('editar-endereco') %>
+            <%= form.submit "Alterar Endereço", class: 'btn btn-primary btn-block' %>
+          <% else %>
+            <%= form.submit "Cadastrar Endereço", class: 'btn btn-primary btn-block' %>
+          <% end %>
+          <br>
+          <br>
+          <br>
         </div>
       </div>
     </div>

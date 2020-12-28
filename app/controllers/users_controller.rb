@@ -29,8 +29,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'Cadastro feito com sucesso.' }
-        format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to root_path, notice: 'Cadastro feito com sucesso.' }
+        # format.json { render root_path, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -41,15 +41,12 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    puts "****************************AQUI 2*************************"
-    puts @user
-    puts user_params
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'Cadastro atualizado com sucesso.' }
-        format.json { render :show, status: :ok, location: @user }
+        redirect_to dados_cadastrais_path, notice: 'Cadastro atualizado com sucesso.'
+        # format.json { render dados_cadastrais_path, status: :ok, location: @user }
       else
-        format.html { render :edit }
+        format.html { render editar_path }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

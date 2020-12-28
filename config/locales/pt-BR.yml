@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      user: Cliente
+    attributes:
+      user:
+        current_password: "Senha atual"
+
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "E-mail não pode ser vazio"
+            current_password:
+              blank: "não pode ficar em branco"

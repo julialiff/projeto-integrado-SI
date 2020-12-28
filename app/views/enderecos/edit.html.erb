@@ -1,0 +1,19 @@
+<div class="container form-box dados-usuario-container">
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center">
+      <%= render partial: "users/partials/navbar" %>
+      <br />
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col col-4 align-self-center">
+      <h4>Editar endereço</h4>
+    </div>
+    <div class="col col-2 align-self-center">
+      <%= link_to '< Voltar aos meus endereços', meus_enderecos_path, class: 'link_voltar' %>
+    </div>
+  </div>
+
+<%= render 'form', endereco: @endereco %>
+

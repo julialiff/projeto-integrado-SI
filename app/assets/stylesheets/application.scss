@@ -40,7 +40,7 @@ nav div{
 }
 
 .form-box {
-    margin-top: 50px;
+    // margin-top: 50px;
 }
 
 .divider-break {
@@ -90,4 +90,76 @@ em {
 
 .dropdown-item {
     font-size: 15px
+}
+
+.dados-usuario-container {
+    margin-top: 20px;
+}
+
+.dados-usuario {
+    border: 1px solid rgba(86,61,124,.2);
+    font-size: 12px;
+    padding: 14px;
+}
+
+.login {
+    color: #FFF;
+}
+
+a:hover.login {
+    text-decoration: none;
+    color: #343a40;
+}
+
+.carrinho {
+    margin-top: 5px;
+}
+
+.nav-vertical {
+    margin-top: 67px
+}
+
+.nav-tabs {
+    font-size: 14px;
+}
+
+.hr-divider {
+    margin: 50px 0 30px 0;
+    width: 100%;
+    height: 12px;
+    border-bottom: 1px solid #b32400;
+    text-align: center;
+}
+
+.hr-divider-text {
+    color: #b32400;
+    font-size: 12px;
+    background-color: #F3F5F6;
+    padding: 0 10px;
+}
+
+.link_voltar {
+    font-size: 12px;
+}
+
+.checkbox {
+    font-size: 12px;
+    margin-top:45px;
+}
+
+.endereco {
+    margin-top: 20px;
+}
+
+.endereco-titulo {
+    font-size: 14px;
+}
+
+.card-body {
+    font-size: 12px;
+}
+
+.devise-error {
+    font-size: 12px;
+    padding: 0.75rem 0.75rem 0rem;
 }

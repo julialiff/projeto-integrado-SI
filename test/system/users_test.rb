@@ -16,7 +16,6 @@ class UsersTest < ApplicationSystemTestCase
 
     fill_in "Data nascimento", with: @user.data_nascimento
     fill_in "Documento", with: @user.documento
-    fill_in "Endereco", with: @user.endereco
     check "Is admin" if @user.is_admin
     fill_in "Nome", with: @user.nome
     click_on "Create User"
@@ -31,7 +30,6 @@ class UsersTest < ApplicationSystemTestCase
 
     fill_in "Data nascimento", with: @user.data_nascimento
     fill_in "Documento", with: @user.documento
-    fill_in "Endereco", with: @user.endereco
     check "Is admin" if @user.is_admin
     fill_in "Nome", with: @user.nome
     click_on "Update User"

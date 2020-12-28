@@ -1,0 +1,119 @@
+<div class="container form-box dados-usuario-container">
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center">
+      <%= render partial: "users/partials/navbar" %>
+      <br />
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col col-4 align-self-center">
+      <h4>Novo endereço</h4>
+    </div>
+    <div class="col col-2 align-self-center">
+      <%= link_to '< Voltar aos meus endereços', meus_enderecos_path, class: 'link_voltar' %>
+    </div>
+  </div>
+    <%#= render 'form', endereco: @endereco #%>
+
+
+    <%= form_with(model: @endereco, local: true) do |form| %>
+
+    <% if @endereco.errors.any? %>
+    <div class="alert alert-primary" role="alert">
+      <%= pluralize(@endereco.errors.count, "erro") %> não permitiu que o endereço não fosse salvo:
+
+      <ul>
+        <% @endereco.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+      <div class="row justify-content-center">
+        <div class="col col-3 align-self-left">
+          <div class="form-group">
+            <%= form.label :cep, 'CEP', class: 'form-text' %>
+            <%= form.text_field :cep, autofocus: true, class: 'form-control', placeholder: '00000-000', required: true %>
+          </div>
+        </div>
+
+        <div class="col col-3 align-self-left">
+          <div class="form-group">
+            <%= form.label :estado, 'Estado', class: 'form-text' %>
+            <%= form.select(:estado, ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'], {prompt: "Selecione o Estado"}, {class: "form-control"}) %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col col-3 align-self-left">
+          <div class="form-group">
+            <%= form.label :cidade, 'Cidade', class: 'form-text' %>
+            <%= form.text_field :cidade, class: 'form-control', placeholder: 'Cidade', required: true %>
+          </div>
+        </div>
+
+        <div class="col col-3 align-self-left">
+          <div class="form-group">
+            <%= form.label :bairro, 'Bairro', class: 'form-text' %>
+            <%= form.text_field :bairro, class: 'form-control', placeholder: 'Bairro', required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col col-6 align-self-left">
+          <div class="form-group">
+            <%= form.label :logradouro, 'Logradouro', class: 'form-text' %>
+            <%= form.text_field :logradouro, class: 'form-control', placeholder: 'Av. Paulista', required: true %>
+          </div>
+        </div>
+      </div>
+    
+
+      <div class="row justify-content-center">
+        <div class="col col-3 align-self-left">
+          <div class="form-group">
+            <%= form.label :numero, 'Número', class: 'form-text' %>
+            <%= form.text_field :numero, class: 'form-control', placeholder: '1241', required: true  %>
+          </div>
+        </div>
+
+        <div class="col col-3 align-self-left">
+          <div class="form-group">
+            <%= form.label :complemento, 'Complemento', class: 'form-text' %>
+            <%= form.text_field :complemento, class: 'form-control', placeholder: 'Apto 10/Bloco A' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col col-3 align-self-left">
+          <div class="form-group">
+            <%= form.label :nome, 'Nome do endereço', class: 'form-text' %>
+            <%= form.text_field :nome, class: 'form-control', placeholder: 'Casa/Trabalho/Casa namorada', required: true  %>
+          </div>
+        </div>
+
+        <div class="col col-3 align-self-left">
+          <div class="form-group checkbox">
+            <%= form.check_box :default %> <strong>Definir endereço como padrão?</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col col-6 align-self-left">
+          <div class="actions">
+            <%# hidden_field(:user_id, value: current_user.id) %>
+            <%= form.submit "Cadastrar Endereço", class: 'btn btn-primary btn-block' %>
+          </div>
+        </div>
+      </div>
+
+    <% end %> 
+
+  </div>
+</div>

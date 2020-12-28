@@ -16,22 +16,22 @@
           </li>
     </ul>
     <ul class="navbar-nav ml-auto" style="margin-right:80px">
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-shopping-cart fa-sm mx-2"></i>
-                Carrinho
-            </a>
-        </li>
         <% if user_signed_in? %>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-shopping-cart fa-sm mx-2"></i>
+                    Carrinho
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Minha conta
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">                    
+                    <%= link_to dados_cadastrais_path() , class: "dropdown-item" do %>
                         <i class="fas fa-user-cog fa-sm mx-2"></i>
                         Configurações
-                    </a>
+                    <% end %>
                     <a class="dropdown-item" href="#">
                         <i class="fas fa-box-open fa-sm mx-2"></i>
                         Meus pedidos
@@ -42,9 +42,15 @@
                 </div>
             </li>
         <% else %>
+            <li class="nav-item">
+                <a class="nav-link carrinho" href="#">
+                    <i class="fas fa-shopping-cart fa-sm mx-2"></i>
+                    Carrinho
+                </a>
+            </li>
             <li class="nav-link">
-                <button class="btn btn-sm btn-outline-primary login" type="button">
-                    <%= link_to "Login", :login %>
+                <button class="btn btn-sm btn-outline-light login" type="button">
+                    <%= link_to "Login", :login, class: "login" %>
                 </button>
             </li>
         <% end %>

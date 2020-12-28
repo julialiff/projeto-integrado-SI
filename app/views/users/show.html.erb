@@ -1,29 +1,42 @@
-<p id="notice"><%= notice %></p>
+<div class="container dados-usuario-container">
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center">
+      <%= render partial: "users/partials/navbar" %>
+      <br />
+    </div>
+  </div>
 
-<p>
-  <strong>Is admin:</strong>
-  <%= @user.is_admin %>
-</p>
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center">
+      <h4>Meus dados</h4>
+    </div>
+  </div>
 
-<p>
-  <strong>Nome:</strong>
-  <%= @user.nome %>
-</p>
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center dados-usuario">
+      <strong>Nome:</strong></br />
+      <%= @user.nome %>
+    </div>
+  </div>
 
-<p>
-  <strong>Documento:</strong>
-  <%= @user.documento %>
-</p>
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center dados-usuario">
+      <strong>Email:</strong><br />
+      <%= @user.email %>
+    </div>
+  </div>
 
-<p>
-  <strong>Data nascimento:</strong>
-  <%= @user.data_nascimento %>
-</p>
-
-<p>
-  <strong>Endereco:</strong>
-  <%= @user.endereco %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center dados-usuario">
+      <strong>Documento:</strong><br />
+      <%= mascara_documento(@user.documento) %>
+    </div>
+  </div>
+        
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center dados-usuario">
+      <strong>Data nascimento:</strong><br />
+      <%= @user.data_nascimento %>
+    </div>
+  </div>
+</div>

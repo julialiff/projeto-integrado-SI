@@ -2,13 +2,23 @@ pt-BR:
   activerecord:
     models:
       user: Cliente
+      comerciante: Comerciante
     attributes:
       user:
         current_password: "Senha atual"
+      comerciante:
+        current_password: "Senha atual"
+      
 
     errors:
       models:
         user:
+          attributes:
+            email:
+              blank: "E-mail não pode ser vazio"
+            current_password:
+              blank: "não pode ficar em branco"
+        comerciante:
           attributes:
             email:
               blank: "E-mail não pode ser vazio"

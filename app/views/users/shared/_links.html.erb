@@ -1,6 +1,8 @@
 <%- if controller_name != 'sessions' %>
-  <div class="divider-break">
-    <h5>Já tem cadastro?</h5>
+  <div class="hr-divider hr-login-divider">
+    <span class="hr-divider-text hr-login-text">
+      Já tem cadastro?
+    </span>
   </div>
   <%= link_to "Faça o Login", new_session_path(resource_name), class: "btn btn-secondary btn-block" %><br />
 <% end %>
@@ -12,9 +14,12 @@
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <div class="divider-break">
-    <h5>Novo por aqui?</h5>
+  <div class="hr-divider hr-login-divider">
+    <span class="hr-divider-text hr-login-text">
+      Novo por aqui?
+    </span>
   </div>
+
   <div class="btn-center">
     <%= link_to "Crie sua conta", cadastrar_path(), class: "btn btn-secondary btn-block" %>
   </div>

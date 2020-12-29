@@ -19,7 +19,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    puts "****************************AQUI 1*************************"
   end
 
   # POST /users
@@ -57,7 +56,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Usuário excluído com sucesso.' }
       format.json { head :no_content }
     end
   end

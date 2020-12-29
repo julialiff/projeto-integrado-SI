@@ -50,7 +50,6 @@ nav div{
     padding-top: 1px;
     margin-bottom: 14px;
     line-height: 1;
-    
 }
 
 h5 {
@@ -134,8 +133,16 @@ a:hover.login {
 .hr-divider-text {
     color: #b32400;
     font-size: 12px;
-    background-color: #F3F5F6;
+    background-color: #FFF;
     padding: 0 10px;
+}
+
+.hr-login-divider {
+    border-bottom: 1px solid #696969 !important;
+}
+
+.hr-login-text {
+    color: #696969 !important;
 }
 
 .link_voltar {

@@ -1,7 +1,7 @@
 <div class="container form-box">
   <div class="row justify-content-center">
     <div class="col col-4 align-self-center">
-      <h2>Entrar</h2>
+      <h2>Login</h2>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-group'}) do |f| %>
         <div class="form-group">
@@ -22,11 +22,23 @@
         <% end %>
 
         <div class="actions">
-          <%= f.submit "Log in", class: 'btn btn-primary btn-block' %>
+          <%= f.submit "Entrar", class: 'btn btn-primary btn-block' %>
         </div>
       <% end %>
 
       <%= render "users/shared/links" %>
+
+      <div class="hr-divider hr-login-divider">
+        <span class="hr-divider-text hr-login-text">
+          É vendedor?
+        </span>
+      </div>
+    
+      <div class="btn-center">
+        <%= link_to "Login vendedor", new_comerciante_session_path, class: "btn btn-secondary btn-block" %>
+      </div>
+
+      <br><br>
     </div>
   </div>
 </div>

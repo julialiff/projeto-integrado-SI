@@ -1,0 +1,35 @@
+<strong><h4 style="color:red">Área do administrador</h4></strong>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <% if request.env['PATH_INFO'].include?("area-admin/usuarios") %>
+      <span class="nav-link active">Usuários/Clientes</span>
+    <% else %>
+      <%= link_to area_admin_usuarios, class:"nav-link" do %>
+        Usuários/Clientes
+      <% end %>
+    <% end %>
+  </li>
+
+  <li class="nav-item">
+    <% if request.env['PATH_INFO'] == "/editar" %>
+    <span class="nav-link active">Vendedores</span>
+    <% else %>
+      <%= link_to editar_path, class:"nav-link" do %>
+        Vendedores
+      <% end %>
+    <% end %>
+    
+  </li>
+
+  <li class="nav-item">
+    <% if request.env['PATH_INFO'] == "/meus-enderecos" || request.env['PATH_INFO'] == '/novo-endereco' || request.env['PATH_INFO'].include?('editar-endereco') %>
+      <span class="nav-link active">Histórico de Vendas</span>
+    <% else %>
+      <%= link_to "Histórico de Vendas", meus_enderecos_path, class:"nav-link" %>
+    <% end %>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="#">Produtos</a>
+  </li>
+</ul>

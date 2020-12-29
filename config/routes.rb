@@ -17,13 +17,14 @@ Rails.application.routes.draw do
     get 'vendedor/dados-cadastrais', to: 'comerciantes#show'
   end
 
-
-
   get 'meus-enderecos', to: 'enderecos#enderecos_by_user'
   get 'novo-endereco', to: 'enderecos#new'
   get 'editar-endereco', to: 'enderecos#edit'
   get 'definir_padrao', to: 'enderecos#set_default'
-  # get 'login-vendedor', to: 'new_comerciante_session'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'area-admin/usuarios', to: 'users#index'
+  get 'area-admin/usuarios/editar', to: 'users#edit'
+  get 'area-admin/usuarios/change-admin-status', to: 'users#change_admin_status'
+  get 'area-admin/usuarios/activate_deactivate', to: 'users#activate_deactivate'
+
 	root 'welcome#index'
 end

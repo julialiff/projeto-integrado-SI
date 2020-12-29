@@ -13,9 +13,9 @@ default: &default
 
 development:
   <<: *default 
-  database: projetosi
-  username: pld
-  password: pld
+  database: projetosi-dev
+  username: root
+  password: root
   host: localhost
   pool: 5
   port: 5432

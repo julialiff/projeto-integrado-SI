@@ -19,7 +19,7 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :email, class: 'form-text' %>
+            <%= f.label :email, 'E-mail', class: 'form-text' %>
             <%= f.email_field :email, autocomplete: "email", class: 'form-control', placeholder: 'email@exemplo.com', required: true %>
           </div>
 
@@ -30,12 +30,12 @@
             <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
           </div>
 
-          <div class="field">
+          <div class="form-group">
             <%= f.label :password_confirmation, 'Confirmação da senha', class: 'form-text' %>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
           </div>
 
-          <div class="field">
+          <div class="form-group">
             <%= f.label :current_password, class: 'form-text' do %>
               Senha atual <i style="font-size:10px;">(precisamos de sua senha atual para confirmarmos as alterações)</i><br />
             <% end %>
@@ -47,7 +47,6 @@
             <%= f.submit "Atualizar", class: 'btn btn-primary btn-block' %>
           </div>
         <% end %>
-        
         
 
         <div class="hr-divider">

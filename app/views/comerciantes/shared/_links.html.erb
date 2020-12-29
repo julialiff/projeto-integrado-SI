@@ -1,14 +1,28 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+  <div class="hr-divider hr-login-divider">
+    <span class="hr-divider-text hr-login-text">
+      Já tem cadastro?
+    </span>
+  </div>
+  <%= link_to "Faça o login", new_session_path(resource_name), class: "btn btn-secondary btn-block" %><br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+  <div class="forgot-password">
+    <%= link_to "Esqueceu a senha?", new_password_path(resource_name) %>
+  </div>
 <% end %>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <div class="hr-divider hr-login-divider">
+    <span class="hr-divider-text hr-login-text">
+      Novo por aqui?
+    </span>
+  </div>
+  <%= link_to "Crie sua conta como vendedor", new_registration_path(resource_name), class: "btn btn-secondary btn-block" %><br />
+<% end %>
+
+
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />

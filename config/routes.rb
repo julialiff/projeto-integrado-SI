@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :enderecos
+  devise_for :comerciantes
   devise_for :users
   resources :users
   devise_scope :user do

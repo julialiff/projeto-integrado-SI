@@ -25,7 +25,9 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+    byebug
     @product = Product.new(product_params)
+    @product.foto.attach(params[:product][:foto])
 
     respond_to do |format|
       if @product.save
@@ -70,6 +72,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:nome, :category, :descricao, :quantidade, :price, :comerciante, :foto)
+      params.require(:product).permit(:nome, :category_id, :descricao, :quantidade, :price, :comerciante_id, :foto)
     end
 end

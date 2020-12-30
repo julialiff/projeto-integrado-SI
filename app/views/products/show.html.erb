@@ -7,7 +7,7 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @product.category %>
+  <%= @product.category.nome %>
 </p>
 
 <p>
@@ -21,18 +21,20 @@
 </p>
 
 <p>
-  <strong>Price:</strong>
-  <%= @product.price %>
+  <strong>preco:</strong>
+  <%= @product.preco %>
 </p>
 
 <p>
   <strong>Comerciante:</strong>
-  <%= @product.comerciante %>
+  <%= @product.comerciante.nome %>
 </p>
 
 <p>
   <strong>Foto:</strong>
-  <%= @product.foto %>
+  <% if @product.foto.attached? %>
+  <img src="<%=(url_for(@product.foto))%>">
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |

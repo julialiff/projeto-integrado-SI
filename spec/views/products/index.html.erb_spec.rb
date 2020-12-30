@@ -8,7 +8,7 @@ RSpec.describe "products/index", type: :view do
         category: "",
         descricao: "",
         quantidade: "",
-        price: "",
+        preco: "",
         comerciante: "",
         foto: "MyText"
       ),
@@ -17,7 +17,7 @@ RSpec.describe "products/index", type: :view do
         category: "",
         descricao: "",
         quantidade: "",
-        price: "",
+        preco: "",
         comerciante: "",
         foto: "MyText"
       )

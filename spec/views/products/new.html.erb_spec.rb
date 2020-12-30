@@ -7,7 +7,7 @@ RSpec.describe "products/new", type: :view do
       category: "",
       descricao: "",
       quantidade: "",
-      price: "",
+      preco: "",
       comerciante: "",
       foto: "MyText"
     ))
@@ -26,7 +26,7 @@ RSpec.describe "products/new", type: :view do
 
       assert_select "input[name=?]", "product[quantidade]"
 
-      assert_select "input[name=?]", "product[price]"
+      assert_select "input[name=?]", "product[preco]"
 
       assert_select "input[name=?]", "product[comerciante]"
 

@@ -7,7 +7,7 @@ RSpec.describe "products/show", type: :view do
       category: "",
       descricao: "",
       quantidade: "",
-      price: "",
+      preco: "",
       comerciante: "",
       foto: "MyText"
     ))

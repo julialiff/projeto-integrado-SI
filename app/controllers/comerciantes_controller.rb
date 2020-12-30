@@ -45,6 +45,14 @@ class ComerciantesController < ApplicationController
     end
   end
 
+  def meus_produtos
+    if current_comerciante
+      @products = current_comerciante.products
+    else
+      redirect_to root_path, alert: "Você precisa estar logado para acessar esta área."
+    end
+  end
+
   ################################### ADMIN ########################
 
   def check_admin

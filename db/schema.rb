@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_30_012736) do
+ActiveRecord::Schema.define(version: 2020_12_30_030122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,20 @@ ActiveRecord::Schema.define(version: 2020_12_30_012736) do
     t.index ["user_id"], name: "index_enderecos_on_user_id"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "nome"
+    t.text "descricao"
+    t.integer "quantidade"
+    t.decimal "preco"
+    t.text "foto"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "category_id", null: false
+    t.bigint "comerciante_id", null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["comerciante_id"], name: "index_products_on_comerciante_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.boolean "is_admin"
     t.string "nome"
@@ -71,4 +85,6 @@ ActiveRecord::Schema.define(version: 2020_12_30_012736) do
   end
 
   add_foreign_key "enderecos", "users"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "comerciantes"
 end

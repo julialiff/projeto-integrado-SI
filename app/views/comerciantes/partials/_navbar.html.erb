@@ -17,7 +17,11 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="#">Meus produtos</a>
+    <% if request.env['PATH_INFO'].include?("/meus-produtos") %>
+      <span class="nav-link active">Meus produtos</span>
+    <% else %>
+      <%= link_to "Meus produtos", vendedor_meus_produtos_path, class:"nav-link" %>
+    <% end %>
   </li>
 
   <li class="nav-item">

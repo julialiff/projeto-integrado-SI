@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :products
   resources :categories
   resources :enderecos
   devise_for :comerciantes, path: 'comerciantes'
@@ -32,6 +33,8 @@ Rails.application.routes.draw do
   get 'area-admin/categorias', to: 'categories#index'
   get 'activate_deactivate', to: 'users#deactivate'
   get 'area-admin/categorias/activate_deactivate', to: 'categories#activate_deactivate'
+
+  get 'vendedor/meus-produtos', to: 'comerciantes#meus_produtos'
 
 	root 'welcome#index'
 end

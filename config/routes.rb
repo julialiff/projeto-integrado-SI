@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get 'area-admin/vendedores', to: 'comerciantes#index'
   get 'area-admin/categorias', to: 'categories#index'
   get 'activate_deactivate', to: 'users#deactivate'
-  get 'area-admin/categorias/activate_deactivate', to: 'welcome#index'
+  get 'area-admin/categorias/activate_deactivate', to: 'categories#activate_deactivate'
 
 	root 'welcome#index'
 end

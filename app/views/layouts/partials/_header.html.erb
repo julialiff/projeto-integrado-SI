@@ -8,10 +8,13 @@
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top:10px;">
         Categorias
       </a>
+      <% fetch_categories() %>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Máscara Adulto</a>
-        <a class="dropdown-item" href="#">Máscara Infantil</a>
-        <a class="dropdown-item" href="#">Faceshield</a>
+        
+        <% @categories_header.each do |cat| %>
+          <a class="dropdown-item" href="#"><%= cat.nome %></a>
+        <% end %>
+        <a class="dropdown-item" href="#">Todas</a>
       </div>
       </li>
   </ul>

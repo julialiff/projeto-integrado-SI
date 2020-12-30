@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resources :categories
   resources :enderecos
   devise_for :comerciantes, path: 'comerciantes'
   devise_for :users
   resources :users
+
   devise_scope :user do
     get 'login', to: 'devise/sessions#new'
     get 'cadastrar', to: 'devise/registrations#new'
@@ -27,7 +29,9 @@ Rails.application.routes.draw do
   get 'area-admin/usuarios/activate_deactivate', to: 'users#activate_deactivate'
   get 'area-admin/vendedores/activate_deactivate', to: 'comerciantes#activate_deactivate'
   get 'area-admin/vendedores', to: 'comerciantes#index'
+  get 'area-admin/categorias', to: 'categories#index'
   get 'activate_deactivate', to: 'users#deactivate'
+  get 'area-admin/categorias/activate_deactivate', to: 'welcome#index'
 
 	root 'welcome#index'
 end

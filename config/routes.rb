@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   get 'area-admin/usuarios/editar', to: 'users#edit'
   get 'area-admin/usuarios/change-admin-status', to: 'users#change_admin_status'
   get 'area-admin/usuarios/activate_deactivate', to: 'users#activate_deactivate'
+  get 'area-admin/vendedores/activate_deactivate', to: 'comerciantes#activate_deactivate'
+  get 'area-admin/vendedores', to: 'comerciantes#index'
+  get 'activate_deactivate', to: 'users#deactivate'
 
 	root 'welcome#index'
 end

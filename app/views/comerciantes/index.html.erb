@@ -1,0 +1,56 @@
+<div class="container form-box dados-usuario-container">
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
+      <%= render partial: "users/partials/admin_navbar" %>
+      <br />
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
+      <h4>Lista de vendedores</h4>
+
+      <table class="table" style="font-size:14px;">
+        <thead>
+          <th scope="col">Conta ativa?</th>
+          <th scope="col">Nome</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Produtos</th>
+          <th scope="col">Pedidos</th>
+          <th colspan="1"></th>
+        </thead>
+        <tbody>
+          <% @comerciantes.each do |comerciante| %>
+            <tr>
+              <td style="text-align: center;">
+                <% if comerciante.is_active %>
+                  <i class="fas fa-check-circle fa-sm mx-0" style="color:green"></i>
+                <% else %>
+                  <i class="fas fa-times-circle fa-sm mx-0" style="color:red"></i>
+                <% end %>
+              </td>
+              <td><%= comerciante.nome %></td>
+              <td><%= comerciante.email %></td>
+              <td>(10) Produtos</td>
+              <td>(20) Pedidos</td>
+              <td>
+                <% if comerciante.is_active %>
+                  <%= link_to area_admin_vendedores_activate_deactivate_path(id: comerciante), data: { confirm: "Tem certeza de que deseja desativar a conta de #{comerciante.email}?" }, class: 'btn btn-outline-danger btn-block btn-sm' do %>
+                    <i class="fas fa-times fa-sm mx-0"></i> Desativar
+                  <% end %>
+                <% else %>
+                  <%= link_to area_admin_vendedores_activate_deactivate_path(id: comerciante), data: { confirm: "Tem certeza de que deseja ativar a conta de #{comerciante.email}?" }, class: 'btn btn-outline-success btn-block btn-sm' do %>
+                    <i class="fas fa-times fa-sm mx-0"></i> Ativar
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+        
+
+
+    </div>
+  </div>
+</div>

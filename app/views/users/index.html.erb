@@ -53,11 +53,11 @@
               </td>
               <td>
                 <% if user.is_active %>
-                  <%= link_to area_admin_usuarios_activate_deactivate_path(id: user), data: { confirm: 'Tem certeza de que deseja desativar esta conta?' }, class: 'btn btn-outline-danger btn-block btn-sm' do %>
+                  <%= link_to area_admin_usuarios_activate_deactivate_path(id: user), data: { confirm: "Tem certeza de que deseja desativar a conta de #{user.email}?" }, class: 'btn btn-outline-danger btn-block btn-sm' do %>
                     <i class="fas fa-times fa-sm mx-0"></i> Desativar
                   <% end %>
                 <% else %>
-                  <%= link_to area_admin_usuarios_activate_deactivate_path(id: user), data: { confirm: 'Tem certeza de que deseja desativar esta conta?' }, class: 'btn btn-outline-success btn-block btn-sm' do %>
+                  <%= link_to area_admin_usuarios_activate_deactivate_path(id: user), data: { confirm: "Tem certeza de que deseja ativar a conta de #{user.email}?" }, class: 'btn btn-outline-success btn-block btn-sm' do %>
                     <i class="fas fa-times fa-sm mx-0"></i> Ativar
                   <% end %>
                 <% end %>

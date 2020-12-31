@@ -7,8 +7,48 @@
   </div>
 
   <div class="row justify-content-center" style="margin-bottom:20px;">
-    <div class="col col-6 align-self-center">
+    <div class="col col-4 align-self-center">
       <h4>Meus produtos</h4>
+    </div>
+    <div class="col col-2 align-self-center">
+      <%= link_to 'Adicionar Produto', vendedor_novo_produto_path, class: "btn btn-primary" %>
+      <br>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col col-6 align-self-center">
+
+      <table class="table" style="font-size:14px;">
+        <thead>
+          <tr>
+            <th scope="col">Imagem</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Qtd</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Categoria</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td>
+                <% if product.foto.attached? %>
+                  <img src="<%=(url_for(product.foto))%>" style="width:50px;">
+                <% end %>
+              </td>
+              <td><%= product.nome %></td>
+              <td><%= product.quantidade %></td>
+              <td><%= product.preco %></td>
+              <td><%= product.category.nome %></td>
+              <td>Editar</td>
+              <td>Acompanhar Vendas</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

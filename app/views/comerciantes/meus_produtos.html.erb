@@ -37,9 +37,11 @@
               <td>
                 <% if product.foto.attached? %>
                   <img src="<%=(url_for(product.foto))%>" style="width:50px;">
+                <% else %>
+                  <i class="fas fa-image" style="font-size: 48px; color:#bfbfbf"></i>
                 <% end %>
               </td>
-              <td><%= product.nome %></td>
+              <td><%= link_to product.nome, product %></td>
               <td><%= product.quantidade %></td>
               <td><%= product.preco %></td>
               <td><%= product.category.nome %></td>

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   devise_scope :comerciante do
     get 'vendedor/login', to: 'devise/sessions#new'
     get 'vendedor/cadastrar', to: 'devise/registrations#new'
-    get 'vendedor/editar', to: 'devise/registrations#edit'
+    get 'vendedor/editar-cadastro', to: 'devise/registrations#edit'
     get 'vendedor/dados-cadastrais', to: 'comerciantes#show'
   end
 
@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   get 'vendedor/meus-produtos', to: 'comerciantes#meus_produtos'
   get 'vendedor/novo-produto', to: 'products#new'
+  get 'vendedor/editar-produto', to: 'products#edit'
 
 	root 'welcome#index'
 end

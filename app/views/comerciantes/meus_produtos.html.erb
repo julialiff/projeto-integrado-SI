@@ -45,7 +45,7 @@
               <td><%= product.quantidade %></td>
               <td><%= product.preco %></td>
               <td><%= product.category.nome %></td>
-              <td>Editar</td>
+              <td><%= link_to "Editar", vendedor_editar_produto_path(id: product.id) %></td>
               <td>Acompanhar Vendas</td>
             </tr>
           <% end %>

@@ -1,0 +1,36 @@
+<div class="container form-box dados-usuario-container">
+  <% if @products_carrinho %>
+    <div class="row justify-content-top">
+      <div class="col col-9 align-self-top">
+        <% @products_carrinho.each do |pc| %>
+          <div class="row justify-content-top">
+            <div class="col col-2 align-self-top">
+              <% if pc['product'].foto.attached? %>
+                <img src="<%=(url_for(pc['product'].foto))%>" style="width:150px;">
+              <% else %>
+                <i class="fas fa-image" style="font-size: 48px; color:#bfbfbf"></i>
+              <% end %>
+            </div>
+
+            <div class="col col-7 align-self-top">
+              <h3><%= pc['product'].nome %></h3>
+              <h5>Vendido por: <%= pc['product'].comerciante.nome %></h5>
+              <br><br><br>
+              Qtd | Excluir 
+            </div>
+
+            <div class="col col-3 align-self-top">
+              <h3>R$ <%= pc['product'].preco %></h3>
+            </div>
+          </div>
+          
+        <% end %>
+      </div>
+      <div class="col col-3 align-self-top">
+        <span style="font-size:18px;">
+          Subtotal (<%= @products_carrinho.count %> <%= @products_carrinho.count > 1 ? "itens" : "item" %>): R$ <%= @total %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+</div>

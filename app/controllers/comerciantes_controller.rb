@@ -1,7 +1,8 @@
 class ComerciantesController < ApplicationController
-  before_action :set_comerciante, only: [:show, :edit, :update, :destroy]
+  before_action :set_comerciante, only: [:show, :edit, :update, :destroy, :activate_deactivate]
 
   def index
+    check_admin
     @comerciantes = Comerciante.all
   end
 
@@ -42,6 +43,32 @@ class ComerciantesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Cadastro feito com sucesso.' }
     end
+  end
+
+  def meus_produtos
+    if current_comerciante
+      @products = current_comerciante.products
+    else
+      redirect_to root_path, alert: "Você precisa estar logado para acessar esta área."
+    end
+  end
+
+  ################################### ADMIN ########################
+
+  def check_admin
+    if current_user
+      if !current_user.is_admin
+        redirect_to root_path
+      end
+    else
+      redirect_to root_path
+    end
+  end
+
+  def activate_deactivate
+    @comerciante.is_active = !@comerciante.is_active
+    @comerciante.save
+    redirect_back fallback_location: root_path
   end
 
   private

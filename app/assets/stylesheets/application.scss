@@ -170,3 +170,25 @@ a:hover.login {
     font-size: 12px;
     padding: 0.75rem 0.75rem 0rem;
 }
+
+.preco {
+    color:#B12704 !important;
+}
+
+.estoque-ok {
+    color: #007600 !important;
+    font-size: 20px;
+}
+
+.estoque-falta {
+    color: #bfbfbf !important;
+}
+
+.descricao-produto {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.quantidade-carrinho {
+    width: 60px;
+}

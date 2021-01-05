@@ -1,0 +1,32 @@
+<%= form_with(model: carrinho, local: true) do |form| %>
+  <% if carrinho.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(carrinho.errors.count, "error") %> prohibited this carrinho from being saved:</h2>
+
+      <ul>
+        <% carrinho.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user %>
+    <%= form.text_field :user %>
+  </div>
+
+  <div class="field">
+    <%= form.label :product %>
+    <%= form.text_field :product %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantidade %>
+    <%= form.number_field :quantidade %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

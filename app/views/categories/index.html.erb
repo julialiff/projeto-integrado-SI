@@ -1,0 +1,71 @@
+<div class="container form-box dados-usuario-container">
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
+      <%= render partial: "users/partials/admin_navbar" %>
+      <br />
+    </div>
+  </div>
+
+  <div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col col-6 align-self-center">
+      <h4>Categorias</h4>
+    </div>
+    <div class="col col-2 align-self-center">
+      <%= link_to 'Criar Categoria', new_category_path, class: "btn btn-primary" %>
+      <br>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
+
+      <table class="table" style="font-size:14px;">
+        <thead>
+          <tr>
+            <th scope="col" style="text-align: center;">Habilitada?</th>
+            <th scope="col">Nome</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @categories.each do |category| %>
+            <tr>
+              <td style="text-align: center;">
+                <% if category.is_active %>
+                  <i class="fas fa-check-circle fa-sm mx-0" style="color:green"></i>
+                <% else %>
+                  <i class="fas fa-times-circle fa-sm mx-0" style="color:red"></i>
+                <% end %>
+              </td>
+              <td><%= category.nome %></td>
+              <td><%= link_to 'Produtos nesta categoria', edit_category_path(category) %></td>
+              <td>
+                <%= link_to edit_category_path(category), class: 'btn btn-outline-primary btn-block btn-sm' do %>
+                  <i class="fas fa-edit fa-sm mx-0"></i>
+                  Editar
+                <% end %>
+              </td>
+              <td>
+                <% if category.is_active %>
+                  <%= link_to area_admin_categorias_activate_deactivate_path(id: category), data: { confirm: "Tem certeza de que deseja desativar a categoria #{category.nome}?" }, class: 'btn btn-outline-danger btn-block btn-sm' do %>
+                    <i class="fas fa-times fa-sm mx-0"></i> Desativar
+                  <% end %>
+                <% else %>
+                  <%= link_to area_admin_categorias_activate_deactivate_path(id: category), data: { confirm: "Tem certeza de que deseja ativar a categoria #{category.nome}?" }, class: 'btn btn-outline-success btn-block btn-sm' do %>
+                    <i class="fas fa-times fa-sm mx-0"></i> Ativar
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+
+      
+
+    </div>
+  </div>
+</div>

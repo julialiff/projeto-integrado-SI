@@ -1,0 +1,57 @@
+<div class="container form-box dados-usuario-container">
+  <div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col col-5 align-self-center">
+      <% if @product.foto.attached? %>
+        <img src="<%=(url_for(@product.foto))%>" style="width:400px;">
+      <% else %>
+        <i class="fas fa-image" style="font-size: 48px; color:#bfbfbf"></i>
+      <% end %>
+    </div>
+
+    <div class="col col-7 align-text-top">
+      <h3><strong><%= @product.nome %></strong></h3>
+      <h5>Vendido por: <%= @product.comerciante.nome %></h5><br>
+
+      <div class="row justify-content-center" style="margin-bottom:20px;">
+        <div class="col col-1 align-self-center align-text-right">
+          <h5>Por:</h5>
+        </div>
+        <div class="col col-6 align-self-center">
+          <h3 class="preco">R$ <%= "%.2f" % @product.preco %></h3>
+        </div>
+        <div class="col col-5 align-self-top align-text-right">
+          <% if @product.quantidade > 0 %>
+            <%= form_for @carrinho, url: add_to_carrinho_path(@carrinho), html: {method: :post} do |form| %>
+              <table style="margin-bottom:15px;">
+                <tr>
+                  <td style="font-size:12px;padding-right:15px;padding-left:40px;">Quantidade:</td>
+                  <td><%= form.number_field :quantidade, class: 'form-control quantidade-carrinho', value: 1, min: 1, max: @product.quantidade %></td>
+                </tr>
+              </table>
+              <%= form.hidden_field :user_id, value: current_user.id %>
+              <%= form.hidden_field :product_id, value: @product.id %>
+
+              <%= button_tag(type: 'submit', class:"btn btn-info btn-block") do %>
+                <i class="fas fa-shopping-cart fa-sm mx-2"></i>
+                Adicionar ao carrinho
+              <% end %>
+            <% end %>
+          <% else %>
+            Não está em estoque
+          <% end %>
+        </div>
+      </div>
+
+      <% if @product.quantidade > 0 %>
+        <p class="estoque-ok">Em estoque.</p>
+      <% else %>
+        <p class="estoque-falta">Sem estoque</p>
+      <% end %>
+
+      <p class="descricao-produto">
+        <%= @product.descricao %>
+      </p>
+      
+    </div>
+  </div>
+</div>

@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  
-  # GET /users
-  # GET /users.json
+  before_action :set_user, only: [:index, :show, :edit, :update, :destroy, :admin, :activate_deactivate, :deactivate, :check_active]
+
   def index
+    admin_control
     @users = User.all
   end
 
@@ -61,13 +60,42 @@ class UsersController < ApplicationController
     end
   end
 
+  def deactivate
+    @user.is_active = !@user.is_active
+    @user.save
+    redirect_to root_path, notice: "Conta desativada com sucesso."
+    sign_out @user
+  end
+
+  ###################### ADMIN ###################### 
+  def admin_control
+    if !@user.is_admin
+      redirect_to root_path
+    end
+  end
+
+  def change_admin_status
+    user = User.find(params[:id])
+    user.is_admin = !user.is_admin
+    user.save
+    redirect_to area_admin_usuarios_path, notice: 'Status de administrador do usuário alterado com sucesso.'
+  end
+
+  def activate_deactivate
+    @user.is_active = !@user.is_active
+    @user.save
+    redirect_back fallback_location: root_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      if current_user
+      if params[:id]
+        @user = User.find(params[:id])
+      elsif current_user
         @user = current_user
       else
-        @user = User.find(params[:id])
+        redirect_to root_path, notice: 'Faça login para acessar esta área'
       end
     end
 

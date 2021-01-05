@@ -74,7 +74,7 @@ class EnderecosController < ApplicationController
   def destroy
     @endereco.destroy
     respond_to do |format|
-      format.html { redirect_to meus_enderecos_path, notice: 'Endereco was successfully destroyed.' }
+      format.html { redirect_to meus_enderecos_path, notice: 'Endereço excluído com sucesso.' }
       format.json { head :no_content }
     end
   end

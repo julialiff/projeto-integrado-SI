@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Carrinhos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Product</th>
+      <th>Quantidade</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @carrinhos.each do |carrinho| %>
+      <tr>
+        <td><%= carrinho.user %></td>
+        <td><%= carrinho.product %></td>
+        <td><%= carrinho.quantidade %></td>
+        <td><%= link_to 'Show', carrinho %></td>
+        <td><%= link_to 'Edit', edit_carrinho_path(carrinho) %></td>
+        <td><%= link_to 'Destroy', carrinho, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Carrinho', new_carrinho_path %>

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :orders
+  resources :carrinhos do
+    post :create
+  end
+
+
   resources :products
   resources :categories
   resources :enderecos
@@ -37,6 +43,11 @@ Rails.application.routes.draw do
   get 'vendedor/meus-produtos', to: 'comerciantes#meus_produtos'
   get 'vendedor/novo-produto', to: 'products#new'
   get 'vendedor/editar-produto', to: 'products#edit'
+
+  get 'meu-carrinho', to: 'carrinhos#carrinho_usuario'
+  get 'add_carrinho', to: 'carrinhos#add_carrinho'
+  post 'add_to_carrinho', to: 'carrinhos#add_to_carrinho'
+
 
 	root 'welcome#index'
 end

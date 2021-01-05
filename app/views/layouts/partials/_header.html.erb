@@ -21,10 +21,10 @@
   <ul class="navbar-nav ml-auto" style="margin-right:80px">
     <% if user_signed_in? %>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+      <%= link_to meu_carrinho_path(), class: 'nav-link' do %>
           <i class="fas fa-shopping-cart fa-sm mx-2"></i>
           Carrinho
-        </a>
+        <% end %>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

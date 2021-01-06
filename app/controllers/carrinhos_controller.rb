@@ -30,7 +30,7 @@ class CarrinhosController < ApplicationController
     if @carrinho
       # Se houver um registro com mesmo usuário e produto,
       # apenas atualiza a quantidade ao invés de criar um novo.
-      if tem_estoque?(product_id)
+      if tem_estoque?(product_id, qtd)
         updated_carrinho_params = carrinho_params
         updated_carrinho_params['quantidade'] = qtd + @carrinho.quantidade
         @carrinho.update(updated_carrinho_params)
@@ -88,11 +88,12 @@ class CarrinhosController < ApplicationController
   # DELETE /carrinhos/1
   # DELETE /carrinhos/1.json
   def destroy
+    product_id = @carrinho.product_id
+    qtd = @carrinho.quantidade * (-1)
+    altera_estoque(product_id, qtd)
+    @carrinho.quantidade
     @carrinho.destroy
-    respond_to do |format|
-      format.html { redirect_to carrinhos_url, notice: 'Carrinho was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_back fallback_location: meu_carrinho_path, notice: "Produto removido do carrinho com sucesso."
   end
 
   def carrinho_usuario
@@ -103,12 +104,30 @@ class CarrinhosController < ApplicationController
       products_carrinho.each do |p|
         p = p.attributes
         p['product'] = Product.find(p['product_id'])
+        p['carrinho'] = Carrinho.find(p['id'])
         @products_carrinho.push(p)
         @total += (p['product'].preco)*p['quantidade']
       end
       puts '-'*20
       puts @products_carrinho.first
       puts '-'*20
+    end
+  end
+
+  def atualiza_qtd
+    qtd = carrinho_params['quantidade'].to_i
+    product_id = carrinho_params['product_id'].to_i
+    carrinho_id = carrinho_params['carrinho_id'].to_i
+    carrinho = Carrinho.find(carrinho_id)
+
+    if carrinho.quantidade == qtd
+      redirect_back fallback_location: meu_carrinho_path
+    else
+      diferenca = qtd - carrinho.quantidade
+      carrinho.quantidade = qtd
+      carrinho.save
+      altera_estoque(product_id, diferenca)
+      redirect_back fallback_location: meu_carrinho_path
     end
   end
 
@@ -127,6 +146,6 @@ class CarrinhosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def carrinho_params
-      params.require(:carrinho).permit(:user, :product, :quantidade, :user_id, :product_id)
+      params.require(:carrinho).permit(:user, :product, :quantidade, :user_id, :product_id, :carrinho_id)
     end
 end

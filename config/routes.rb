@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   get 'meu-carrinho', to: 'carrinhos#carrinho_usuario'
   get 'add_carrinho', to: 'carrinhos#add_carrinho'
   post 'add_to_carrinho', to: 'carrinhos#add_to_carrinho'
-
+  post 'atualiza_qtd', to: 'carrinhos#atualiza_qtd'
 
 	root 'welcome#index'
 end

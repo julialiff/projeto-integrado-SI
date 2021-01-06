@@ -1,10 +1,14 @@
 <div class="container form-box dados-usuario-container">
+  <h3>Carrinho de compras</h3>
+  <hr class="dotted">
+
   <% if @products_carrinho %>
     <div class="row justify-content-top">
       <div class="col col-9 align-self-top">
         <% @products_carrinho.each do |pc| %>
           <div class="row justify-content-top">
-            <div class="col col-2 align-self-top">
+            <div class="col col-3 align-self-top">
+
               <% if pc['product'].foto.attached? %>
                 <img src="<%=(url_for(pc['product'].foto))%>" style="width:150px;">
               <% else %>
@@ -12,24 +16,52 @@
               <% end %>
             </div>
 
-            <div class="col col-7 align-self-top">
+            <div class="col col-6 align-self-top">
               <h3><%= pc['product'].nome %></h3>
               <h5>Vendido por: <%= pc['product'].comerciante.nome %></h5>
               <br><br><br>
-              Qtd | Excluir 
+
+              <span class="h5-size">
+                <%= form_for pc['carrinho'], url: atualiza_qtd_path(@carrinho), html: {method: :post} do |form| %>
+                  <%= form.hidden_field :product_id, value: pc['product_id'] %>
+                  <%= form.hidden_field :carrinho_id, value: pc['id'] %>
+                <table>
+                  <tr>
+                    <td style='padding-right:10px;'>Qtd:</td>
+                    <td style='padding-right:5px;'><%= form.number_field :quantidade, class: 'form-control form-control-sm quantidade-carrinho', value: pc['quantidade'], min: 1, max: pc['product'].quantidade %></td>
+                    <td style='padding-right:20px;'><%= form.submit "Atualizar", class:"btn btn-info btn-sm py-0" %></td>
+                    <td style='padding-right:20px;'>|</td>
+                    <td><%= link_to "Excluir", carrinho_path(pc['carrinho']), method: :delete, data: { confirm: 'Tem certeza de que deseja remover este produto do carrinho?'} %></td>
+                  </tr>
+                </table>
+                <% end %>
             </div>
 
             <div class="col col-3 align-self-top">
-              <h3>R$ <%= pc['product'].preco %></h3>
+              <h4 class="preco">R$ <%= "%.2f" % pc['product'].preco %></h4>
             </div>
           </div>
+          <hr class="dotted">
           
         <% end %>
+
+
+        <div class="row justify-content-top">
+          <div class="col col-12 align-self-top subtotal" style="text-align:right;">
+            Subtotal (<%= @products_carrinho.count %> <%= @products_carrinho.count > 1 ? "itens" : "item" %>):
+            <strong>R$ <%= "%.2f" % @total %></strong>
+          </div>
+        </div>
+        
       </div>
-      <div class="col col-3 align-self-top">
-        <span style="font-size:18px;">
-          Subtotal (<%= @products_carrinho.count %> <%= @products_carrinho.count > 1 ? "itens" : "item" %>): R$ <%= @total %>
+      <div class="col col-3 align-self-top" style="border-left:1px dotted #bfbfbf;">
+        <span class="subtotal">
+          Subtotal (<%= @products_carrinho.count %> <%= @products_carrinho.count > 1 ? "itens" : "item" %>):
+          <strong>R$ <%= "%.2f" % @total %></strong>
         </span>
+        <br>
+        <br>
+        <div class="btn btn-info btn-block">Fechar pedido</div>
       </div>
     </div>
   <% end %>

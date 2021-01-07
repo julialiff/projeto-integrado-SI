@@ -9,4 +9,13 @@ module ApplicationHelper
       return phone
     end
   end
+
+
+  def qtd_carrinho
+    if current_user
+      current_user.carrinhos.count
+    else
+      0
+    end
+  end
 end

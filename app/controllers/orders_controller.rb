@@ -21,6 +21,66 @@ class OrdersController < ApplicationController
   def edit
   end
 
+  def checkout
+    if !current_user || current_user.carrinhos.empty?
+      redirect_to root_path
+    end
+    @endereco = current_user.enderecos.find_by(default: true)
+    @products_carrinho = []
+    @total = 0
+
+    products_carrinho = current_user.carrinhos
+    products_carrinho.each do |p|
+      p = p.attributes
+      p['product'] = Product.find(p['product_id'])
+      p['carrinho'] = Carrinho.find(p['id'])
+      @products_carrinho.push(p)
+      @total += (p['product'].preco)*p['quantidade']
+    end
+  end
+
+  def create_order
+    if !current_user || current_user.carrinhos.empty?
+      redirect_to root_path
+    end
+    @carrinhos = current_user.carrinhos
+    order_number = DateTime.now.strftime('%Y%m%d').to_s + @carrinhos.first.id.to_s
+    @carrinhos.each do |cart|
+      preco_produto = Product.find(cart.product_id).preco
+      order = Order.new(
+        quantidade: cart.quantidade,
+        numero_pedido: order_number,
+        preco: preco_produto,
+        user_id: current_user.id,
+        product_id: cart.product_id,
+        endereco_id: current_user.enderecos.find_by(default: true).id
+      )
+      order.save
+      cart.destroy
+    end
+    redirect_to root_path, notice: "Pedido criado com sucesso"
+  end
+
+  def pedidos_cliente
+    if current_user
+      all_orders = current_user.orders
+      @pedidos = []
+      i = 0
+      all_orders.each do |order|
+        if @pedidos.empty?
+          @pedidos[i] = [order]
+          next
+        end
+        if @pedidos[i].last.numero_pedido == order.numero_pedido
+          @pedidos[i].push(order)
+        else
+          i += 1
+          @pedidos[i] = [order]
+        end
+      end
+    end
+  end
+
   # POST /orders
   # POST /orders.json
   def create

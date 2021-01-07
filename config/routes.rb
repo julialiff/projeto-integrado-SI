@@ -48,6 +48,12 @@ Rails.application.routes.draw do
   get 'add_carrinho', to: 'carrinhos#add_carrinho'
   post 'add_to_carrinho', to: 'carrinhos#add_to_carrinho'
   post 'atualiza_qtd', to: 'carrinhos#atualiza_qtd'
+  delete 'remover_do_carrinho', to: 'carrinhos#remover_do_carrinho'
+  delete 'limpar_carrinho', to: 'carrinhos#limpar_carrinho'
+
+  get 'checkout', to: 'orders#checkout'
+  get 'criar-pedido', to: 'orders#create_order'
+  get 'meus-pedidos', to: 'orders#pedidos_cliente'
 
 	root 'welcome#index'
 end

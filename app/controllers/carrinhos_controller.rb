@@ -88,12 +88,32 @@ class CarrinhosController < ApplicationController
   # DELETE /carrinhos/1
   # DELETE /carrinhos/1.json
   def destroy
+    @carrinho.destroy
+    redirect_back fallback_location: meu_carrinho_path
+  end
+
+  def remover_do_carrinho
+    # Função para remover um produto do carrinho voltando o estoque dele para o que estava antes
     product_id = @carrinho.product_id
     qtd = @carrinho.quantidade * (-1)
     altera_estoque(product_id, qtd)
-    @carrinho.quantidade
     @carrinho.destroy
     redirect_back fallback_location: meu_carrinho_path, notice: "Produto removido do carrinho com sucesso."
+  end
+
+  def limpar_carrinho
+    # Função para quando o usuário escolhe remover todos os itens do carrinho
+    if current_user
+      current_user.carrinhos.each do |carrinho|
+        product_id = carrinho.product_id
+        qtd = carrinho.quantidade * (-1)
+        altera_estoque(product_id, qtd)
+        carrinho.destroy
+      redirect_back fallback_location: root_path, notice: "Itens removidos do carrinho com sucesso."
+      end      
+    else
+      redirect_back fallback_location: root_path
+    end
   end
 
   def carrinho_usuario

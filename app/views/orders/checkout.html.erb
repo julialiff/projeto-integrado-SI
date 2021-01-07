@@ -1,0 +1,76 @@
+<div class="container form-box dados-usuario-container">
+  <h3>Confira e finalize seu pedido</h3>
+  <hr class="dotted">
+    <div class="row justify-content-top">
+      <div class="col col-9 align-self-top">
+        
+          <div class="row justify-content-top">
+            <div class="col col-6 align-self-top checkout-body">
+              <% if @endereco %>
+                <strong>Endereço de entrega</strong><br>
+                <%= @endereco.nome %><br>
+                <%= @endereco.logradouro %>, <%= @endereco.numero %><br>
+                <% if @endereco.complemento %>
+                  <%= @endereco.complemento %><br>
+                <% end %>
+                <%= @endereco.cidade %> - <%= @endereco.estado %><br>
+                <%= @endereco.cep %>
+              <% else %>
+                link Cadastre um endereço
+              <% end %>
+            </div>
+            <div class="col col-6 align-self-top checkout-body">
+              <strong>Forma de pagamento</strong><br><br>
+              A combinar com o vendedor
+            </div>
+          </div>
+          <hr class="dotted">
+          <% @products_carrinho.each do |pc| %>
+            <div class="row justify-content-top">
+              <div class="col col-3 align-self-top">
+
+                <% if pc['product'].foto.attached? %>
+                  <img src="<%=(url_for(pc['product'].foto))%>" style="width:150px;">
+                <% else %>
+                  <i class="fas fa-image" style="font-size: 48px; color:#bfbfbf"></i>
+                <% end %>
+              </div>
+
+              <div class="col col-6 align-self-top">
+                <strong class="subtotal"><%= pc['product'].nome %></strong><br>
+                <span class="h5-size">Vendido por: <%= pc['product'].comerciante.nome %></span><br>
+                <div class="card-body" style="padding:0;">
+                  <strong class="preco">R$ <%= "%.2f" % pc['product'].preco %></strong><br>
+                  <strong>Quantidade: </strong><%= pc['quantidade'] %></span>
+                </div>
+              </div>
+            </div>
+            <hr class="dotted">
+            
+          <% end %>
+
+      </div>
+    <div class="col col-3 align-self-top" style="border-left:1px dotted #bfbfbf;">
+      <%= link_to "Confirmar pedido", criar_pedido_path, class: "btn btn-info btn-block" %>
+      <div class="checkout-body" style="margin-top:15px;">
+        <strong>Resumo do pedido:</strong>
+        <table style="width:100%;">
+          <tr>
+            <td>Itens:</td>
+            <td style="text-align:right;">R$ <%= "%.2f" % @total %></td>
+          </tr>
+          <tr>
+            <td>Frete:</td>
+            <td style="text-align:right;">R$ 0,00</td>
+          </tr>
+        </table>
+      </div>
+      <table class="subtotal preco" style="width:100%;">
+        <tr>
+          <td><strong>Total do pedido:</strong></td>
+          <td style="text-align:right;"><strong>R$ <%= "%.2f" % @total %></strong></td>
+        </tr>
+      </table>
+    </div>
+    </div>
+</div>

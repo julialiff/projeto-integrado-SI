@@ -18,9 +18,9 @@
         <div class="card" style="margin-bottom:20px;">
           <div class="card-header">
 
-            <table style="width:100%;" class="h5-size">
+            <table style="width:100%;font-size:11px;" class="h5-size">
               <tr>
-                <td>
+                <td style="width:27%;"">
                   PEDIDO FEITO EM<br>
                   <%= pedido.first.created_at %>
                 </td>
@@ -47,10 +47,12 @@
                 <% end %>
               </div>
               <div class="col col-9 align-self-center">
-                <%= product.nome %><br>
+                <%= product.nome %>
+                <span style="font-size:10px;color:#797979;">(x<%= p.quantidade %>)</span>
+                <br>
                 Categoria: <%= product.category.nome %><br>
                 <span style="font-size:10px;color:#797979;">Vendido por: <%= product.comerciante.nome %></span><br>
-                <span class="preco">R$ <%= "%.2f" % p.preco %></span>
+                <span class="preco">R$ <%= "%.2f" % p.preco %></span> 
               </div>
             </div>
             <% if p != pedido.last %>

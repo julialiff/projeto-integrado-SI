@@ -10,6 +10,9 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    if !current_user || !current_user.is_admin
+      redirect_to root_path
+    end
   end
 
   # GET /orders/new

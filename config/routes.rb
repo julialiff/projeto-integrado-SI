@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'novo-endereco', to: 'enderecos#new'
   get 'editar-endereco', to: 'enderecos#edit'
   get 'definir_padrao', to: 'enderecos#set_default'
+  
   get 'area-admin/usuarios', to: 'users#index'
   get 'area-admin/usuarios/editar', to: 'users#edit'
   get 'area-admin/usuarios/change-admin-status', to: 'users#change_admin_status'
@@ -37,6 +38,9 @@ Rails.application.routes.draw do
   get 'area-admin/vendedores/activate_deactivate', to: 'comerciantes#activate_deactivate'
   get 'area-admin/vendedores', to: 'comerciantes#index'
   get 'area-admin/categorias', to: 'categories#index'
+  get 'area-admin/historico-de-vendas', to: 'orders#index'
+  get 'area-admin/produtos', to: 'products#index'
+
   get 'activate_deactivate', to: 'users#deactivate'
   get 'area-admin/categorias/activate_deactivate', to: 'categories#activate_deactivate'
 
@@ -54,6 +58,7 @@ Rails.application.routes.draw do
   get 'checkout', to: 'orders#checkout'
   get 'criar-pedido', to: 'orders#create_order'
   get 'meus-pedidos', to: 'orders#pedidos_cliente'
+  
 
 	root 'welcome#index'
 end

@@ -31,14 +31,19 @@
   </li>
 
   <li class="nav-item">
-    <% if request.env['PATH_INFO'] == "/meus-enderecos" || request.env['PATH_INFO'] == '/novo-endereco' || request.env['PATH_INFO'].include?('editar-endereco') %>
+    <% if request.env['PATH_INFO'] == "/area-admin/historico-de-vendas" %>
       <span class="nav-link active">Histórico de Vendas</span>
     <% else %>
-      <%= link_to "Histórico de Vendas", meus_enderecos_path, class:"nav-link" %>
+      <%= link_to "Histórico de Vendas", area_admin_historico_de_vendas_path, class:"nav-link" %>
     <% end %>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="#">Produtos</a>
+    <% if request.env['PATH_INFO'] == "/area-admin/produtos" %>
+      <span class="nav-link active">Produtos</span>
+    <% else %>
+      <%= link_to "Produtos", area_admin_produtos_path, class:"nav-link" %>
+    <% end %>
+
   </li>
 </ul>

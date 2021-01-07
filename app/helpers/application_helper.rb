@@ -18,4 +18,8 @@ module ApplicationHelper
       0
     end
   end
+
+  def get_product(product_id)
+    Product.find(product_id)
+  end
 end

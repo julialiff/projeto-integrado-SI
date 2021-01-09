@@ -17,6 +17,7 @@
             <th scope="col">Conta ativa?</th>
             <th scope="col">Nome</th>
             <th scope="col">E-mail</th>
+            <th scope="col">Telefone</th>
             <th scope="col">Data de nascimento</th>
             <th colspan="2"></th>
           </tr>
@@ -40,6 +41,7 @@
                 </td>
               <td><%= user.nome %></td>
               <td><%= user.email %></td>
+              <td><%= user.telefone %></td>
               <td><%= user.data_nascimento %></td>
               <td>
                 <%= link_to area_admin_usuarios_change_admin_status_path(id: user), class: 'btn btn-outline-primary btn-block btn-sm' do %>

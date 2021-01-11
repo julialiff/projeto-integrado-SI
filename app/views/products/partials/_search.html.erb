@@ -1,0 +1,30 @@
+<%= form_tag(area_admin_produtos_path, method: :get) do %>
+<table>
+  <tr>
+    <td style="padding-right:20px;">
+      <%= text_field_tag(:nome_produto, params[:nome_produto], class: 'form-control', placeholder: 'Nome do produto', autofocus: true) %>
+    </td>
+    <td style="padding-right:20px;">
+      <%= select_tag :category_id, options_for_select(@categories.collect { |c| [c.nome, c.id] }, @category_id), {class: "form-control", prompt: "Selecione uma categoria..."} %>
+    </td>
+    <td style="padding-right:20px;">
+      <%= select_tag :comerciante_id, options_for_select(@comerciantes.collect { |c| [c.nome, c.id] }, @comerciante_id), {class: "form-control", prompt: "Selecione um vendedor..."} %>
+    </td>
+    <td style="padding-right:20px;">
+      <%= hidden_field_tag :order, @order %>
+      <%= hidden_field_tag :filter, @filter %>
+      <%= submit_tag "Pesquisar", class: "btn btn-primary btn-block" %>
+    </td>
+  </tr>
+  <% end %>
+  <tr>
+    <td colspan="2" style="padding-top:15px;" class="endereco-titulo">
+      <% if params['nome_produto'] && !params['nome_produto'].empty? %>
+        Resultados da pesquisa por <i>"<%= params['nome_produto'] %>"</i>:
+      <% end %>
+    </td>
+    <td>
+      <%= link_to "Limpar pesquisa", area_admin_produtos_path(), class:'link_voltar' %>
+    </td>
+  </tr>
+</table>

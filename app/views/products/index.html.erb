@@ -6,9 +6,15 @@
     </div>
   </div>
 
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
+      <h4>Produtos</h4>
+    </div>
+  </div>
+
   <div class="row justify-content-center" style="margin-bottom:20px;">
     <div class="col col-8 align-self-center">
-      <h4>Meus produtos</h4>
+      <%= render partial: "products/partials/search" %>
     </div>
   </div>
 
@@ -19,10 +25,58 @@
         <thead>
           <tr>
             <th scope="col">Imagem</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Qtd</th>
-            <th scope="col">Preço</th>
-            <th scope="col">Categoria</th>
+            <th scope="col">
+              <% if params['filter'] == 'nome' && params['order'] == 'asc' %>
+                <%= link_to  area_admin_produtos_path(filter:"nome", order:"desc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-up fa-sm mx-0"></i>
+                  Nome
+                <% end %>
+              <% elsif params['filter'] == 'nome' && params['order'] == 'desc' %>
+                <%= link_to area_admin_produtos_path(filter:"nome", order:"asc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-down fa-sm mx-0"></i>
+                  Nome
+                <% end %>
+              <% else %>
+                <%= link_to "Nome", area_admin_produtos_path(filter:"nome", order:"asc", nome_produto: @nome_produto) %>
+              <% end %>
+            </th>
+
+            <th scope="col">
+            <% if params['filter'] == 'quantidade' && params['order'] == 'asc' %>
+              <%= link_to  area_admin_produtos_path(filter:"quantidade", order:"desc", nome_produto: @nome_produto) do %>
+                <i class="fas fa-chevron-up fa-sm mx-0"></i>
+                Qtd
+              <% end %>
+            <% elsif params['filter'] == 'quantidade' && params['order'] == 'desc' %>
+              <%= link_to area_admin_produtos_path(filter:"quantidade", order:"asc", nome_produto: @nome_produto) do %>
+                <i class="fas fa-chevron-down fa-sm mx-0"></i>
+                Qtd
+              <% end %>
+            <% else %>
+              <%= link_to "Qtd", area_admin_produtos_path(filter:"quantidade", order:"asc", nome_produto: @nome_produto) %>
+            <% end %>
+            </th>
+
+            <th scope="col">
+              <% if params['filter'] == 'preco' && params['order'] == 'asc' %>
+                <%= link_to  area_admin_produtos_path(filter:"preco", order:"desc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-up fa-sm mx-0"></i>
+                  Preço
+                <% end %>
+              <% elsif params['filter'] == 'preco' && params['order'] == 'desc' %>
+                <%= link_to area_admin_produtos_path(filter:"preco", order:"asc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-down fa-sm mx-0"></i>
+                  Preço
+                <% end %>
+              <% else %>
+                <%= link_to "Preço", area_admin_produtos_path(filter:"preco", order:"asc", nome_produto: @nome_produto) %>
+              <% end %>
+            </th>
+
+            <th scope="col">
+              Categoria
+            </th>
+
             <th scope="col">Vendedor</th>
             <th scope="col"></th>
           </tr>
@@ -38,12 +92,17 @@
                   <i class="fas fa-image" style="font-size: 48px; color:#bfbfbf"></i>
                 <% end %>
               </td>
-              <td><%= link_to product.nome, product %></td>
+              <td>
+                <% if product.nome.length > 15 %>
+                 <% product.nome = product.nome[0..15] + '...' %>
+                <% end %>
+                <%= link_to product.nome, product %>
+              </td>
               <td><%= product.quantidade %></td>
               <td><%= product.preco %></td>
               <td><%= product.category.nome %></td>
               <td><%= product.comerciante.nome %></td>
-              <td>Acompanhar Vendas</td>
+              <td>Acompanhar<br>Vendas</td>
             </tr>
           <% end %>
         </tbody>

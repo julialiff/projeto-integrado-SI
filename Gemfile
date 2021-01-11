@@ -26,6 +26,7 @@ gem 'bundler', '~> 2.1.4'
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 4.6.1'
+gem 'meiomask-rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

@@ -27,8 +27,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        @user.telefone = @user.telefone.gsub(/\D/, '')
+        @user.save
         format.html { redirect_to root_path, notice: 'Cadastro feito com sucesso.' }
-        # format.json { render root_path, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -41,12 +42,11 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        @user.telefone = @user.telefone.gsub(/\D/, '')
+        @user.save
         redirect_to dados_cadastrais_path, notice: 'Cadastro atualizado com sucesso.'
-        # format.json { render dados_cadastrais_path, status: :ok, location: @user }
       else
-        format.html { render editar_path }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+        format.html { render editar_path }      end
     end
   end
 

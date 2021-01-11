@@ -7,13 +7,15 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require("jquery")
 require("jquery-mask-plugin")
+
 jasny/jasny-bootstrap.min.js
 
 import "@fortawesome/fontawesome-free/js/all";
 
 //= require jquery3
+//= require jquery_ujs
+//= require meiomask
 //= popper
 //= bootstrap-sprockets
 

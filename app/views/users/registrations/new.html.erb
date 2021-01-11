@@ -13,7 +13,7 @@
 
           <div class="form-group">
             <%= f.label :telefone, 'Telefone', class: 'form-text' %>
-            <%= f.telephone_field :telefone, autofocus: true, autocomplete: "telefone", class: 'form-control', placeholder: '11-999999999', required: true %>
+            <%= f.telephone_field :telefone, autocomplete: "phone", class: 'form-control', placeholder: '(11) 99999-9999',  input_html: {'id': 'phone-number'}, required: true %>
           </div>
 
           <div class="form-group">

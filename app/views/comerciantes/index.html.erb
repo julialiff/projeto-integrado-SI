@@ -38,8 +38,8 @@
                   <i class="fas fa-times-circle fa-sm mx-0" style="color:red"></i>
                 <% end %>
               </td>
-              <td><%= comerciante.nome %></td>
-              <td><%= comerciante.email %></td>
+              <td><%= link_to comerciante.nome, area_admin_vendedor_path(id: comerciante.id) %></td>
+              <td><%= link_to comerciante.email, area_admin_vendedor_path(id: comerciante.id) %></td>
               <td>
                 <%= link_to area_admin_produtos_path(comerciante_id:comerciante.id) do %>
                   (<%= qtd_produtos(comerciante.id) %>) <%= qtd_produtos(comerciante.id) > 1 ? "Produtos" : "Produto" %>

@@ -18,7 +18,12 @@
 
   <div class="row justify-content-center">
     <div class="col col-8 align-self-center">
+      <%= render partial: "categories/partials/search" %>
+    </div>
+  </div>
 
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
       <table class="table" style="font-size:14px;">
         <thead>
           <tr>
@@ -39,7 +44,7 @@
                 <% end %>
               </td>
               <td><%= category.nome %></td>
-              <td><%= link_to 'Produtos nesta categoria', edit_category_path(category) %></td>
+              <td><%= link_to 'Produtos nesta categoria', area_admin_produtos_path(category_id: category.id) %></td>
               <td>
                 <%= link_to edit_category_path(category), class: 'btn btn-outline-primary btn-block btn-sm' do %>
                   <i class="fas fa-edit fa-sm mx-0"></i>
@@ -64,7 +69,7 @@
 
       <br>
 
-      
+
 
     </div>
   </div>

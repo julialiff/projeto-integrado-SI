@@ -77,8 +77,9 @@
               Categoria
             </th>
 
-            <th scope="col">Vendedor</th>
-            <th scope="col"></th>
+            <th scope="col">
+              Vendedor
+            </th>
           </tr>
         </thead>
 
@@ -101,8 +102,7 @@
               <td><%= product.quantidade %></td>
               <td><%= product.preco %></td>
               <td><%= product.category.nome %></td>
-              <td><%= product.comerciante.nome %></td>
-              <td>Acompanhar<br>Vendas</td>
+              <td><%= link_to product.comerciante.nome, area_admin_vendedor_path(id: product.comerciante.id) %></td>
             </tr>
           <% end %>
         </tbody>

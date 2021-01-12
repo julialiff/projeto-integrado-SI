@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get 'area-admin/historico-de-vendas', to: 'orders#index'
   get 'area-admin/produtos', to: 'products#index'
   get 'area-admin/usuario', to: 'users#user_details'
+  get 'area-admin/vendedor', to: 'comerciantes#detalhes_comerciante'
   get 'area-admin/pedido', to: 'orders#pedido_detalhado'
 
   get 'activate_deactivate', to: 'users#deactivate'

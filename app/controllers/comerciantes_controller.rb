@@ -1,5 +1,5 @@
 class ComerciantesController < ApplicationController
-  before_action :set_comerciante, only: [:show, :edit, :update, :destroy, :activate_deactivate]
+  before_action :set_comerciante, only: [:show, :edit, :update, :destroy, :activate_deactivate, :detalhes_comerciante]
 
   def index
     check_admin
@@ -83,6 +83,10 @@ class ComerciantesController < ApplicationController
     @comerciante.is_active = !@comerciante.is_active
     @comerciante.save
     redirect_back fallback_location: root_path
+  end
+
+  # TODO
+  def detalhes_comerciante
   end
 
   private

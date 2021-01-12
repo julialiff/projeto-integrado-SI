@@ -4,11 +4,17 @@ class UsersController < ApplicationController
   def index
     admin_control
     @users = User.all
+    @pesquisa = params[:pesquisa]
+    if @pesquisa
+      search = '%' + @pesquisa + '%'
+      @users = @users.where("nome ILIKE ? OR email ILIKE ?", search, search)
+    end
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    admin_control
   end
 
   # GET /users/new

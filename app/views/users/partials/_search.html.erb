@@ -1,0 +1,18 @@
+<%= form_tag(area_admin_usuarios_path, method: :get) do %>
+<table style="width:100%">
+  <tr>
+    <td style="padding-right: 20px;width:50%;">
+      <%= text_field_tag(:pesquisa, params[:pesquisa], class: 'form-control', placeholder: 'E-mail ou nome') %>
+    </td>
+    <td style="width:20%;">
+      <%= submit_tag ("Pesquisar"), class: "btn btn-primary btn-block" %>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <%= link_to "Limpar pesquisa", area_admin_usuarios_path(), class:'link_voltar' %>
+    </td>
+  </tr>
+</table>
+<% end %>

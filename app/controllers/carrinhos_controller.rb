@@ -26,7 +26,7 @@ class CarrinhosController < ApplicationController
     user_id = carrinho_params['user_id'].to_i
     qtd = carrinho_params['quantidade'].to_i
     @carrinho = find_carrinho(user_id, product_id)
-    
+
     if @carrinho
       # Se houver um registro com mesmo usuário e produto,
       # apenas atualiza a quantidade ao invés de criar um novo.
@@ -110,7 +110,7 @@ class CarrinhosController < ApplicationController
         altera_estoque(product_id, qtd)
         carrinho.destroy
       redirect_back fallback_location: root_path, notice: "Itens removidos do carrinho com sucesso."
-      end      
+      end
     else
       redirect_back fallback_location: root_path
     end
@@ -128,9 +128,6 @@ class CarrinhosController < ApplicationController
         @products_carrinho.push(p)
         @total += (p['product'].preco)*p['quantidade']
       end
-      puts '-'*20
-      puts @products_carrinho.first
-      puts '-'*20
     end
   end
 

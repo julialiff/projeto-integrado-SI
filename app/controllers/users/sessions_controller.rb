@@ -14,12 +14,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   # def create
-  #   puts '*******************************************'
   #   super do |resource|
-  #     puts "----------------------------------------------------"
-      
-  #     puts resource
-  #     puts "----------------------------------------------------"
   #     unless resource.is_active
   #       sign_out
   #       redirect_to root_path, alert: "Desculpe, mas sua conta não está mais ativa."

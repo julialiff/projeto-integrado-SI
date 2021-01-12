@@ -85,7 +85,6 @@ class ComerciantesController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
-  # TODO
   def detalhes_comerciante
   end
 

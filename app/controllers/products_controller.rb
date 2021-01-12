@@ -13,7 +13,6 @@ class ProductsController < ApplicationController
     @order = params['order']
     @filter = params['filter']
     if @nome_produto && !@nome_produto.empty?
-      puts '-'*25
       nome_produto = '%'+params['nome_produto']+'%'
       @products = @products.where("nome ILIKE ?", nome_produto)
     end

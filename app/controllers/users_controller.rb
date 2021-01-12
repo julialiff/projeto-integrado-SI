@@ -64,7 +64,6 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|  def user_details
       admin_control
-      puts @user
     end
       if @user.update(user_params)
         @user.telefone = @user.telefone.gsub(/\D/, '')
@@ -114,7 +113,6 @@ class UsersController < ApplicationController
 
   def user_details
     admin_control
-    puts @user
   end
 
   private

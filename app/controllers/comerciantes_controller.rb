@@ -1,9 +1,23 @@
 class ComerciantesController < ApplicationController
-  before_action :set_comerciante, only: [:show, :edit, :update, :destroy, :activate_deactivate]
+  before_action :set_comerciante, only: [:show, :edit, :update, :destroy, :activate_deactivate, :detalhes_comerciante]
 
   def index
     check_admin
     @comerciantes = Comerciante.all
+    @pesquisa = params[:pesquisa] ? params[:pesquisa] : ""
+    active = params[:active_only]
+    not_active = params[:not_active]
+
+    if @pesquisa
+      search = '%' + @pesquisa + '%'
+      @comerciantes = @comerciantes.where("nome ILIKE ? OR email ILIKE ?", search, search)
+    end
+    if active
+      @comerciantes = @comerciantes.where(is_active: true)
+    end
+    if not_active
+      @comerciantes = @comerciantes.where(is_active: false)
+    end
   end
 
   def show
@@ -69,6 +83,9 @@ class ComerciantesController < ApplicationController
     @comerciante.is_active = !@comerciante.is_active
     @comerciante.save
     redirect_back fallback_location: root_path
+  end
+
+  def detalhes_comerciante
   end
 
   private

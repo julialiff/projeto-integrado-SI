@@ -1,0 +1,62 @@
+<div class="container form-box dados-usuario-container">
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
+      <%= render partial: "users/partials/admin_navbar" %>
+      <br />
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center">
+      <h4>Detalhes Vendedor</h4>
+    </div>
+    <div class="col col-2 align-self-center">
+      <%= link_to '< Voltar', :back, class: 'link_voltar' %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col col-8">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <%= @comerciante.nome.partition(" ").first %> - <%= @comerciante.id %>
+        </div>
+        <div class="card-body" style="font-size:14px;">
+
+          <table class="table border border-rounded" style="width:100%;">
+            <tr>
+              <td>
+                Nome: <strong><%= @comerciante.nome %></strong>
+              </td>
+              <td>
+                E-mail: <strong><%= @comerciante.email %></strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Documento: <strong><%= @comerciante.documento %></strong></td>
+              <td>Data de criação: <strong><%= @comerciante.created_at %></strong></td>
+            </tr>
+            <tr>
+              <td>
+                <%= link_to area_admin_produtos_path(comerciante_id:@comerciante.id) do %>
+                  (<%= qtd_produtos(@comerciante.id) %>) <%= qtd_produtos(@comerciante.id) > 1 ? "Produtos" : "Produto" %>
+                <% end %>
+              </td>
+              <td>
+                <% if @comerciante.is_active %>
+                  <%= link_to area_admin_vendedores_activate_deactivate_path(id: @comerciante), data: { confirm: "Tem certeza de que deseja desativar a conta de #{@comerciante.email}?" }, class: 'btn btn-outline-danger btn-block btn-sm' do %>
+                    <i class="fas fa-times fa-sm mx-0"></i> Desativar
+                  <% end %>
+                <% else %>
+                  <%= link_to area_admin_vendedores_activate_deactivate_path(id: @comerciante), data: { confirm: "Tem certeza de que deseja ativar a conta de #{@comerciante.email}?" }, class: 'btn btn-outline-success btn-block btn-sm' do %>
+                    <i class="fas fa-times fa-sm mx-0"></i> Ativar
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

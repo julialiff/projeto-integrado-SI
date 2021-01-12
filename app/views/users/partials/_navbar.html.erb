@@ -25,6 +25,10 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="#">Meus pedidos</a>
+    <% if request.env['PATH_INFO'] == "/meus-pedidos" %>
+      <span class="nav-link active">Meus pedidos</span>
+    <% else %>
+      <%= link_to "Meus pedidos", meus_pedidos_path, class:"nav-link" %>
+    <% end %>
   </li>
 </ul>

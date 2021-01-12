@@ -1,0 +1,80 @@
+<div class="container form-box dados-usuario-container">
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
+      <%= render partial: "users/partials/admin_navbar" %>
+      <br />
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col col-8">
+
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <div class="row justify-content-center">
+            <div class="col col-10">
+              Detalhes do pedido <strong>#<%= @numero_pedido %></strong>
+            </div>
+            <div class="col col-2">
+              <%= link_to '< Voltar', :back, class: 'link_voltar' %>
+          </div>
+        </div>
+      </div>
+
+        <div class="card-body">
+          <table class="table border border-rounded" style="width:100%;">
+            <tr>
+              <td>
+                Comprado por: <strong><%= link_to @buyer.nome, area_admin_usuario_path(id: @buyer.id) %></strong>
+              </td>
+              <td>
+                Pedido feito em: <strong><%= @itens_pedido.first.created_at %></strong>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Endereço de entrega: <strong><%= @endereco.nome %></strong></td>
+              <td>
+                <%= @endereco.logradouro %>, <%= @endereco.numero %> - <%= @endereco.complemento %><br>
+                <%= @endereco.bairro %><br>
+                <%= @endereco.cidade %>, <%= @endereco.estado %> <%= @endereco.cep %>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2">Items do pedido:</td>
+            </tr>
+
+            <% @itens_pedido.each do |pedido| %>
+              <tr>
+                <td colspan="2">
+                  <div class="row justify-content-center">
+                    <div class="col col-3 align-self-center">
+                      <% if pedido.product.foto.attached? %>
+                        <img src="<%=(url_for(pedido.product.foto))%>" style="width:100px;">
+                      <% else %>
+                        <i class="fas fa-image" style="font-size: 48px; color:#bfbfbf"></i>
+                      <% end %>
+                    </div>
+
+                    <div class="col col-9 align-self-center">
+                      <%= pedido.product.nome %>
+                      <span style="font-size:10px;color:#797979;">(x<%= pedido.quantidade %>)</span>
+                      <br>
+                      Categoria: <%= pedido.product.category.nome %><br>
+                      <span style="font-size:10px;color:#797979;">Vendido por: <%= pedido.product.comerciante.nome %></span><br>
+                      <span class="preco">R$ <%= "%.2f" % pedido.preco %></span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

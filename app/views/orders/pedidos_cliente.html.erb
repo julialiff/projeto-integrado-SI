@@ -1,0 +1,72 @@
+<div class="container dados-usuario-container">
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center">
+      <%= render partial: "users/partials/navbar" %>
+      <br />
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center">
+      <h4>Meus pedidos</h4>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col col-6 align-self-center">
+
+      <% @pedidos.each do |pedido| %>
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header">
+
+            <table style="width:100%;font-size:11px;" class="h5-size">
+              <tr>
+                <td style="width:27%;"">
+                  PEDIDO FEITO EM<br>
+                  <%= pedido.first.created_at %>
+                </td>
+                <td>
+                  TOTAL<br>
+                  R$ <%= "%.2f" % total(pedido.first.numero_pedido ) %>
+                </td>
+                <td style="text-align: right;">
+                  PEDIDO N° <%= pedido.first.numero_pedido %>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="card-body">
+
+            <% pedido.each do |p| %>
+            <% product = get_product(p.product_id) %>
+            <div class="row justify-content-center">
+              <div class="col col-3 align-self-center">
+                <% if product.foto.attached? %>
+                  <img src="<%=(url_for(product.foto))%>" style="width:100px;">
+                <% else %>
+                  <i class="fas fa-image" style="font-size: 48px; color:#bfbfbf"></i>
+                <% end %>
+              </div>
+              <div class="col col-9 align-self-center">
+                <%= product.nome %>
+                <span style="font-size:10px;color:#797979;">(x<%= p.quantidade %>)</span>
+                <br>
+                Categoria: <%= product.category.nome %><br>
+                <span style="font-size:10px;color:#797979;">Vendido por: <%= product.comerciante.nome %></span><br>
+                <span class="preco">R$ <%= "%.2f" % p.preco %></span> 
+              </div>
+            </div>
+            <% if p != pedido.last %>
+              <hr class="dotted">
+            <% end %>
+            <% end %>
+
+            <!-- <h5 class="card-title">Special title treatment</h5>
+            
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

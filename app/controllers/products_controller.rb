@@ -5,6 +5,27 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+    @categories = Category.all
+    @comerciantes = Comerciante.all
+    @category_id = params['category_id']
+    @comerciante_id = params['comerciante_id']
+    @nome_produto = params['nome_produto']
+    @order = params['order']
+    @filter = params['filter']
+    if @nome_produto && !@nome_produto.empty?
+      nome_produto = '%'+params['nome_produto']+'%'
+      @products = @products.where("nome ILIKE ?", nome_produto)
+    end
+    if @category_id && !@category_id.empty?
+      @products = @products.where(category_id: @category_id.to_i)
+    end
+    if @comerciante_id && !@comerciante_id.empty?
+      @products = @products.where(comerciante_id: @comerciante_id.to_i)
+    end
+    if @filter && @order && !@filter.empty? && !@order.empty?
+      filter = @filter + ' ' + @order
+      @products = @products.order(filter)
+    end
   end
 
   # GET /products/1

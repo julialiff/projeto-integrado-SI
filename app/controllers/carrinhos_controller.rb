@@ -26,11 +26,11 @@ class CarrinhosController < ApplicationController
     user_id = carrinho_params['user_id'].to_i
     qtd = carrinho_params['quantidade'].to_i
     @carrinho = find_carrinho(user_id, product_id)
-    
+
     if @carrinho
       # Se houver um registro com mesmo usuário e produto,
       # apenas atualiza a quantidade ao invés de criar um novo.
-      if tem_estoque?(product_id)
+      if tem_estoque?(product_id, qtd)
         updated_carrinho_params = carrinho_params
         updated_carrinho_params['quantidade'] = qtd + @carrinho.quantidade
         @carrinho.update(updated_carrinho_params)
@@ -89,9 +89,30 @@ class CarrinhosController < ApplicationController
   # DELETE /carrinhos/1.json
   def destroy
     @carrinho.destroy
-    respond_to do |format|
-      format.html { redirect_to carrinhos_url, notice: 'Carrinho was successfully destroyed.' }
-      format.json { head :no_content }
+    redirect_back fallback_location: meu_carrinho_path
+  end
+
+  def remover_do_carrinho
+    # Função para remover um produto do carrinho voltando o estoque dele para o que estava antes
+    product_id = @carrinho.product_id
+    qtd = @carrinho.quantidade * (-1)
+    altera_estoque(product_id, qtd)
+    @carrinho.destroy
+    redirect_back fallback_location: meu_carrinho_path, notice: "Produto removido do carrinho com sucesso."
+  end
+
+  def limpar_carrinho
+    # Função para quando o usuário escolhe remover todos os itens do carrinho
+    if current_user
+      current_user.carrinhos.each do |carrinho|
+        product_id = carrinho.product_id
+        qtd = carrinho.quantidade * (-1)
+        altera_estoque(product_id, qtd)
+        carrinho.destroy
+      redirect_back fallback_location: root_path, notice: "Itens removidos do carrinho com sucesso."
+      end
+    else
+      redirect_back fallback_location: root_path
     end
   end
 
@@ -103,12 +124,27 @@ class CarrinhosController < ApplicationController
       products_carrinho.each do |p|
         p = p.attributes
         p['product'] = Product.find(p['product_id'])
+        p['carrinho'] = Carrinho.find(p['id'])
         @products_carrinho.push(p)
         @total += (p['product'].preco)*p['quantidade']
       end
-      puts '-'*20
-      puts @products_carrinho.first
-      puts '-'*20
+    end
+  end
+
+  def atualiza_qtd
+    qtd = carrinho_params['quantidade'].to_i
+    product_id = carrinho_params['product_id'].to_i
+    carrinho_id = carrinho_params['carrinho_id'].to_i
+    carrinho = Carrinho.find(carrinho_id)
+
+    if carrinho.quantidade == qtd
+      redirect_back fallback_location: meu_carrinho_path
+    else
+      diferenca = qtd - carrinho.quantidade
+      carrinho.quantidade = qtd
+      carrinho.save
+      altera_estoque(product_id, diferenca)
+      redirect_back fallback_location: meu_carrinho_path
     end
   end
 
@@ -127,6 +163,6 @@ class CarrinhosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def carrinho_params
-      params.require(:carrinho).permit(:user, :product, :quantidade, :user_id, :product_id)
+      params.require(:carrinho).permit(:user, :product, :quantidade, :user_id, :product_id, :carrinho_id)
     end
 end

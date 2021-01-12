@@ -5,6 +5,17 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all
+    @pesquisa = params[:pesquisa] ? params[:pesquisa] : ""
+    if @pesquisa
+      search = '%' + @pesquisa + '%'
+      @categories = @categories.where("nome ILIKE ? ", search)
+    end
+    if params[:active_only]
+      @categories = @categories.where(is_active: true)
+    end
+    if params[:not_active]
+      @categories = @categories.where(is_active: false)
+    end
   end
 
   # GET /categories/1

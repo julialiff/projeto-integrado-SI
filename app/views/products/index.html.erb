@@ -1,39 +1,112 @@
-<p id="notice"><%= notice %></p>
+<div class="container form-box dados-usuario-container">
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
+      <%= render partial: "users/partials/admin_navbar" %>
+      <br />
+    </div>
+  </div>
 
-<h1>Products</h1>
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
+      <h4>Produtos</h4>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Category</th>
-      <th>Descricao</th>
-      <th>Quantidade</th>
-      <th>  preco</th>
-      <th>Comerciante</th>
-      <th>Foto</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col col-8 align-self-center">
+      <%= render partial: "products/partials/search" %>
+    </div>
+  </div>
 
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.nome %></td>
-        <td><%= product.category %></td>
-        <td><%= product.descricao %></td>
-        <td><%= product.quantidade %></td>
-        <td><%= product.preco %></td>
-        <td><%= product.comerciante %></td>
-        <td><%= product.foto %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col col-8 align-self-center">
 
-<br>
+      <table class="table" style="font-size:14px;">
+        <thead>
+          <tr>
+            <th scope="col">Imagem</th>
+            <th scope="col">
+              <% if params['filter'] == 'nome' && params['order'] == 'asc' %>
+                <%= link_to  area_admin_produtos_path(filter:"nome", order:"desc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-up fa-sm mx-0"></i>
+                  Nome
+                <% end %>
+              <% elsif params['filter'] == 'nome' && params['order'] == 'desc' %>
+                <%= link_to area_admin_produtos_path(filter:"nome", order:"asc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-down fa-sm mx-0"></i>
+                  Nome
+                <% end %>
+              <% else %>
+                <%= link_to "Nome", area_admin_produtos_path(filter:"nome", order:"asc", nome_produto: @nome_produto) %>
+              <% end %>
+            </th>
 
-<%= link_to 'New Product', new_product_path %>
+            <th scope="col">
+            <% if params['filter'] == 'quantidade' && params['order'] == 'asc' %>
+              <%= link_to  area_admin_produtos_path(filter:"quantidade", order:"desc", nome_produto: @nome_produto) do %>
+                <i class="fas fa-chevron-up fa-sm mx-0"></i>
+                Qtd
+              <% end %>
+            <% elsif params['filter'] == 'quantidade' && params['order'] == 'desc' %>
+              <%= link_to area_admin_produtos_path(filter:"quantidade", order:"asc", nome_produto: @nome_produto) do %>
+                <i class="fas fa-chevron-down fa-sm mx-0"></i>
+                Qtd
+              <% end %>
+            <% else %>
+              <%= link_to "Qtd", area_admin_produtos_path(filter:"quantidade", order:"asc", nome_produto: @nome_produto) %>
+            <% end %>
+            </th>
+
+            <th scope="col">
+              <% if params['filter'] == 'preco' && params['order'] == 'asc' %>
+                <%= link_to  area_admin_produtos_path(filter:"preco", order:"desc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-up fa-sm mx-0"></i>
+                  Preço
+                <% end %>
+              <% elsif params['filter'] == 'preco' && params['order'] == 'desc' %>
+                <%= link_to area_admin_produtos_path(filter:"preco", order:"asc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-down fa-sm mx-0"></i>
+                  Preço
+                <% end %>
+              <% else %>
+                <%= link_to "Preço", area_admin_produtos_path(filter:"preco", order:"asc", nome_produto: @nome_produto) %>
+              <% end %>
+            </th>
+
+            <th scope="col">
+              Categoria
+            </th>
+
+            <th scope="col">
+              Vendedor
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td>
+                <% if product.foto.attached? %>
+                  <img src="<%=(url_for(product.foto))%>" style="width:50px;">
+                <% else %>
+                  <i class="fas fa-image" style="font-size: 48px; color:#bfbfbf"></i>
+                <% end %>
+              </td>
+              <td>
+                <% if product.nome.length > 15 %>
+                 <% product.nome = product.nome[0..15] + '...' %>
+                <% end %>
+                <%= link_to product.nome, product %>
+              </td>
+              <td><%= product.quantidade %></td>
+              <td><%= product.preco %></td>
+              <td><%= product.category.nome %></td>
+              <td><%= link_to product.comerciante.nome, area_admin_vendedor_path(id: product.comerciante.id) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

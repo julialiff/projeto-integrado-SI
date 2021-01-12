@@ -1,20 +1,20 @@
 <div class="container form-box dados-usuario-container">
   <div class="row justify-content-center">
     <div class="col col-8 align-self-center">
-      <%= render partial: "users/partials/admin_navbar" %>
+      <%= render partial: "comerciantes/partials/navbar" %>
       <br />
-    </div>
-  </div>
-
-  <div class="row justify-content-center">
-    <div class="col col-8 align-self-center">
-      <h4>Histórico de vendas</h4>
     </div>
   </div>
 
   <div class="row justify-content-center" style="margin-bottom:20px;">
     <div class="col col-8 align-self-center">
-      <%= render partial: "orders/partials/search" %>
+      <h4>Pedidos</h4>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col col-8 align-self-center">
+      <%= render partial: "orders/partials/vendedor_search" %>
     </div>
   </div>
 
@@ -27,7 +27,7 @@
             <th scope="col">Qtd</th>
             <th scope="col">Pedido N°</th>
             <th scope="col">Preço</th>
-            <th scope="col">Vendedor</th>
+            <th scope="col">Feito em</th>
           </tr>
         </thead>
         <tbody>
@@ -43,10 +43,10 @@
             <td><%= link_to order.product.nome, order.product %></td>
             <td><%= order.quantidade %></td>
             <td>
-              <%= link_to order.numero_pedido, area_admin_pedido_path(numero_pedido: order.numero_pedido) %>
+              <%= link_to order.numero_pedido, vendedor_pedido_path(numero_pedido: order.numero_pedido) %>
             </td>
             <td>R$ <%= "%.2f" % order.preco %></td>
-            <td><%= order.product.comerciante.nome %></td>
+            <td><%= order.created_at %></td>
           </tr>
           <% end %>
         </tbody>

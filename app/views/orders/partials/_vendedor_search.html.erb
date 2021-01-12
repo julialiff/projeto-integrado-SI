@@ -1,0 +1,31 @@
+<%= form_tag(vendedor_historico_pedidos_path, method: :get) do %>
+  <table style="width:100%;">
+    <tr>
+      <td style="padding-right:20px;">
+        <%= text_field_tag(:numero_pedido, params[:numero_pedido], class: 'form-control', placeholder: "Número do pedido") %>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="padding-right:20px;padding-top:10px;">
+        <%= text_field_tag(:email_cliente, params[:email_cliente], class: 'form-control', placeholder: "Email do cliente") %>
+      </td>
+      <td style="padding-right:20px;">
+        <%= submit_tag "Pesquisar", class: "btn btn-primary btn-block" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="endereco-titulo" style="padding-top:15px;">
+        <% if !@numero_pedido.empty? %>
+          Exibindo resultados da busca pelo pedido número <strong><%= @numero_pedido %></strong><br>
+        <% end %>
+        <% if !@email_cliente.empty? %>
+          Exibindo resultados da busca pelos pedidos feitos por <strong><%= @email_cliente %></strong>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to "Limpar pesquisa", vendedor_historico_pedidos_path(), class: 'link_voltar' %>
+      </td>
+    </tr>
+  </table>
+<% end %>

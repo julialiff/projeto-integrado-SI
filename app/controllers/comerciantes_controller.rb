@@ -60,10 +60,25 @@ class ComerciantesController < ApplicationController
   end
 
   def meus_produtos
-    if current_comerciante
-      @products = current_comerciante.products
-    else
+    if !current_comerciante
       redirect_to root_path, alert: "Você precisa estar logado para acessar esta área."
+    end
+    @products = current_comerciante.products
+    @categories = Category.all
+    @category_id = params['category_id']
+    @nome_produto = params['nome_produto']
+    @order = params['order']
+    @filter = params['filter']
+    if @nome_produto && !@nome_produto.empty?
+      nome_produto = '%'+params['nome_produto']+'%'
+      @products = @products.where("nome ILIKE ?", nome_produto)
+    end
+    if @category_id && !@category_id.empty?
+      @products = @products.where(category_id: @category_id.to_i)
+    end
+    if @filter && @order && !@filter.empty? && !@order.empty?
+      filter = @filter + ' ' + @order
+      @products = @products.order(filter)
     end
   end
 

@@ -9,7 +9,17 @@
   <div class="row justify-content-center">
     <div class="col col-8 align-self-center">
       <h4>Histórico de vendas</h4>
+    </div>
+  </div>
 
+  <div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col col-8 align-self-center">
+      <%= render partial: "orders/partials/search" %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col col-8 align-self-center">
       <table class="table" style="font-size:14px;">
         <thead>
           <tr>
@@ -33,7 +43,9 @@
             </td>
             <td><%= link_to product.nome, product %></td>
             <td><%= order.quantidade %></td>
-            <td><%= order.numero_pedido %></td>
+            <td>
+              <%= link_to order.numero_pedido, area_admin_pedido_path(numero_pedido: order.numero_pedido) %>
+            </td>
             <td>R$ <%= "%.2f" % order.preco %></td>
             <td><%= product.comerciante.nome %></td>
           </tr>

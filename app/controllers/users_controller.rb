@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     admin_control
     @users = User.all
-    @pesquisa = params[:pesquisa]
+    @pesquisa = params[:pesquisa] ? params[:pesquisa] : ""
     admin_only = params[:admin_only]
     not_admin = params[:not_admin]
     active = params[:active_only]
@@ -92,7 +92,7 @@ class UsersController < ApplicationController
     sign_out @user
   end
 
-  ###################### ADMIN ###################### 
+  ###################### ADMIN ######################
   def admin_control
     if !current_user || !current_user.is_admin
       redirect_to root_path

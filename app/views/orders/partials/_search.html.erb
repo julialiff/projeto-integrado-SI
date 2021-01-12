@@ -1,0 +1,34 @@
+<%= form_tag(area_admin_historico_de_vendas_path, method: :get) do %>
+  <table style="width:100%;">
+    <tr>
+      <td style="padding-right:20px;">
+        <%= text_field_tag(:numero_pedido, params[:numero_pedido], class: 'form-control', placeholder: "Número do pedido") %>
+      </td>
+      <td style="padding-right:20px;">
+        <%= select_tag :comerciante_id, options_for_select(@comerciantes.collect { |c| [c.nome, c.id] }, @comerciante_id), {class: "form-control", prompt: "Selecione um vendedor..."} %>
+      </td>
+      <td style="padding-right:20px;">
+        <%= submit_tag "Pesquisar", class: "btn btn-primary btn-block" %>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-right:20px;padding-top:10px;">
+        <%= text_field_tag(:email_cliente, params[:email_cliente], class: 'form-control', placeholder: "Email do cliente") %>
+      </td>
+      <td></td>
+      <td>
+        <%= link_to "Limpar pesquisa", area_admin_historico_de_vendas_path(), class: 'link_voltar' %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="endereco-titulo" style="padding-top:15px;">
+        <% if !@numero_pedido.empty? %>
+          Exibindo resultados da busca pelo pedido número <strong><%= @numero_pedido %></strong>
+        <% end %>
+        <% if !@email_cliente.empty? %>
+          Exibindo resultados da busca pelos pedidos feitos por <strong><%= @email_cliente %></strong>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+<% end %>

@@ -7,10 +7,10 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col col-5 align-self-center">
+    <div class="col col-6 align-self-center">
       <h4>Detalhes usuário</h4>
     </div>
-    <div class="col col-3 align-self-center">
+    <div class="col col-2 align-self-center">
       <%= link_to '< Voltar à lista de usuários', :back, class: 'link_voltar' %>
     </div>
   </div>
@@ -22,7 +22,7 @@
           <%= @user.nome.partition(" ").first %> - <%= @user.id %>
         </div>
         <div class="card-body" style="font-size:14px;">
-          
+
           <table class="table border border-rounded" style="width:100%;">
             <tr>
               <td>
@@ -63,15 +63,17 @@
                 <% end %>
               </td>
             </tr>
+            <tr>
+              <td colspan="2">
+                <%= link_to area_admin_historico_de_vendas_path(email_cliente: @user.email) do %>
+                  Ver pedidos feitos
+                  (<%= pedidos_feitos(@user.id) %>)
+                <% end %>
+              </td>
+            </tr>
           </table>
-
-          
-          
-
         </div>
       </div>
-      
-
     </div>
   </div>
 </div>

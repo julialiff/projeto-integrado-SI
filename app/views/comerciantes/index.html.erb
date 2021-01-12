@@ -9,7 +9,16 @@
   <div class="row justify-content-center">
     <div class="col col-8 align-self-center">
       <h4>Lista de vendedores</h4>
+    </div>
+  </div>
+  <div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col col-8 align-self-center">
+      <%= render partial: "comerciantes/partials/search" %>
+      </div>
+  </div>
 
+  <div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col col-8 align-self-center">
       <table class="table" style="font-size:14px;">
         <thead>
           <th scope="col">Conta ativa?</th>
@@ -31,8 +40,16 @@
               </td>
               <td><%= comerciante.nome %></td>
               <td><%= comerciante.email %></td>
-              <td>(10) Produtos</td>
-              <td>(20) Pedidos</td>
+              <td>
+                <%= link_to area_admin_produtos_path(comerciante_id:comerciante.id) do %>
+                  (<%= qtd_produtos(comerciante.id) %>) <%= qtd_produtos(comerciante.id) > 1 ? "Produtos" : "Produto" %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to area_admin_historico_de_vendas_path(comerciante_id: comerciante.id) do %>
+                  (<%= qtd_pedidos(comerciante.id) %>) Pedidos
+                <% end %>
+                </td>
               <td>
                 <% if comerciante.is_active %>
                   <%= link_to area_admin_vendedores_activate_deactivate_path(id: comerciante), data: { confirm: "Tem certeza de que deseja desativar a conta de #{comerciante.email}?" }, class: 'btn btn-outline-danger btn-block btn-sm' do %>
@@ -48,9 +65,6 @@
           <% end %>
         </tbody>
       </table>
-        
-
-
     </div>
   </div>
 </div>

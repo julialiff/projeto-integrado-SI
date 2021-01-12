@@ -22,4 +22,20 @@ module ApplicationHelper
   def get_product(product_id)
     Product.find(product_id)
   end
+
+  def qtd_produtos(comerciante_id)
+    # Retorna a quantidade de produtos de um determinado vendedor
+    Product.where(comerciante_id: comerciante_id).count
+  end
+
+  def qtd_pedidos(comerciante_id)
+    # Retorna a quantidade de pedidos de um determinado vendedor
+    product_ids = Product.where(comerciante_id: comerciante_id).ids
+    Order.where(product_id: product_ids).count
+  end
+
+  def pedidos_feitos(user_id)
+    # Retorna a quantidade de pedidos feita por um determinado usuário
+    Order.where(user_id: user_id).count
+  end
 end

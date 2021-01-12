@@ -4,6 +4,20 @@ class ComerciantesController < ApplicationController
   def index
     check_admin
     @comerciantes = Comerciante.all
+    @pesquisa = params[:pesquisa] ? params[:pesquisa] : ""
+    active = params[:active_only]
+    not_active = params[:not_active]
+
+    if @pesquisa
+      search = '%' + @pesquisa + '%'
+      @comerciantes = @comerciantes.where("nome ILIKE ? OR email ILIKE ?", search, search)
+    end
+    if active
+      @comerciantes = @comerciantes.where(is_active: true)
+    end
+    if not_active
+      @comerciantes = @comerciantes.where(is_active: false)
+    end
   end
 
   def show

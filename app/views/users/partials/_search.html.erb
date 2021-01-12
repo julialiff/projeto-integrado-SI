@@ -25,12 +25,9 @@
     </td>
   </tr>
   <tr>
-    <% if !@pesquisa || !@pesquisa.empty? %>
+    <% if !@pesquisa && !@pesquisa.empty? %>
       <td colspan="2" style="padding-top:10px;">
-        
         Exibindo resultados da pesquisa por "<i><%= @pesquisa %></i>":
-        
-
       </td>
     <% end %>
   </tr>

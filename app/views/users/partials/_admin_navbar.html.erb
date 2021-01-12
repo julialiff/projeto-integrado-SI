@@ -24,14 +24,14 @@
     <% if request.env['PATH_INFO'].include?("/area-admin/categorias") %>
       <span class="nav-link active">Categorias</span>
     <% else %>
-      <%= link_to area_admin_categorias_path, class: "nav-link" do %>  
+      <%= link_to area_admin_categorias_path, class: "nav-link" do %>
         Categorias
       <% end %>
     <% end %>
   </li>
 
   <li class="nav-item">
-    <% if request.env['PATH_INFO'] == "/area-admin/historico-de-vendas" %>
+    <% if request.env['PATH_INFO'] == "/area-admin/historico-de-vendas" || request.env['PATH_INFO'].include?('/area-admin/pedido') %>
       <span class="nav-link active">Histórico de Vendas</span>
     <% else %>
       <%= link_to "Histórico de Vendas", area_admin_historico_de_vendas_path, class:"nav-link" %>

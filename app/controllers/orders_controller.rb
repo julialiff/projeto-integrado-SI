@@ -5,6 +5,21 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     @orders = Order.all
+    @comerciantes = Comerciante.all
+    @comerciante_id = params[:comerciante_id] ? params[:comerciante_id] : ""
+    @email_cliente = params[:email_cliente] ? params[:email_cliente] : ""
+    @numero_pedido = params[:numero_pedido] ? params[:numero_pedido] : ""
+    if @comerciante_id && !@comerciante_id.empty?
+      product_ids = Product.where(comerciante_id: @comerciante_id).ids
+      @orders = @orders.where(product_id: product_ids)
+    end
+    if @email_cliente && !@email_cliente.empty?
+      cliente = User.find_by(email: @email_cliente)
+      @orders = @orders.where(user: cliente)
+    end
+    if @numero_pedido && !@numero_pedido.empty?
+      @orders = @orders.where(numero_pedido: @numero_pedido)
+    end
   end
 
   # GET /orders/1
@@ -82,6 +97,16 @@ class OrdersController < ApplicationController
         end
       end
     end
+  end
+
+  def pedido_detalhado
+    @numero_pedido = params['numero_pedido'] ? params['numero_pedido'] : ""
+    if @numero_pedido.empty?
+      redirect_back fallback_location: root_path
+    end
+    @itens_pedido = Order.where(numero_pedido: @numero_pedido)
+    @buyer = @itens_pedido.first.user
+    @endereco = @itens_pedido.first.endereco
   end
 
   # POST /orders

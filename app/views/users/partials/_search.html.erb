@@ -9,10 +9,30 @@
     </td>
   </tr>
   <tr>
-    <td></td>
-    <td>
+    <td class='link_voltar'>
+      <%= check_box_tag :admin_only %>
+      Mostrar apenas administradores <b>OU</b>
+      <%= check_box_tag :not_admin %>
+      Mostrar apenas NÃO administradores<br>
+
+      <%= check_box_tag :active_only %>
+      Mostrar apenas ativos <b>OU</b>
+      <%= check_box_tag :not_active %>
+      Mostrar apenas NÃO ativos
+    </td>
+    <td valign="top">
       <%= link_to "Limpar pesquisa", area_admin_usuarios_path(), class:'link_voltar' %>
     </td>
+  </tr>
+  <tr>
+    <% if !@pesquisa || !@pesquisa.empty? %>
+      <td colspan="2" style="padding-top:10px;">
+        
+        Exibindo resultados da pesquisa por "<i><%= @pesquisa %></i>":
+        
+
+      </td>
+    <% end %>
   </tr>
 </table>
 <% end %>

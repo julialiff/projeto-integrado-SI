@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def phone_mask(phone) 
-    phone = phone.gsub(/\D/, '')
+  def phone_mask(phone)
+    phone = phone.nil? ? '' : phone.gsub(/\D/, '')
     if phone.length == 11
       return "(" + phone[0..1] + ") " + phone[2..6] + '-' + phone[7..-1]
     elsif phone.length == 10

@@ -46,8 +46,8 @@
                     <i class="fas fa-times-circle fa-sm mx-0" style="color:red"></i>
                   <% end %>
                 </td>
-              <td><%= user.nome %></td>
-              <td><%= user.email %></td>
+              <td><%= link_to user.nome, area_admin_usuario_path(id: user.id) %></td>
+              <td><%= link_to user.email, area_admin_usuario_path(id: user.id) %></td>
               <td>
                 <%= link_to area_admin_usuarios_change_admin_status_path(id: user), class: 'btn btn-outline-primary btn-block btn-sm' do %>
                   <i class="fas fa-edit fa-sm mx-0"></i>

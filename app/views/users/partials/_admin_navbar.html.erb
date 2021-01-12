@@ -1,7 +1,7 @@
 <strong><h4 style="color:red">Área do administrador</h4></strong>
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <% if request.env['PATH_INFO'].include?("area-admin/usuarios") %>
+    <% if request.env['PATH_INFO'].include?("area-admin/usuario") %>
       <span class="nav-link active">Usuários/Clientes</span>
     <% else %>
       <%= link_to area_admin_usuarios_path, class:"nav-link" do %>

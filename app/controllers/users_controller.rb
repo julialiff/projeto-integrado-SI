@@ -1,20 +1,36 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:index, :show, :edit, :update, :destroy, :admin, :activate_deactivate, :deactivate, :check_active]
+  before_action :set_user, only: [:index, :show, :edit, :update, :destroy, :admin, :activate_deactivate, :deactivate, :check_active, :user_details]
 
   def index
     admin_control
     @users = User.all
     @pesquisa = params[:pesquisa]
+    admin_only = params[:admin_only]
+    not_admin = params[:not_admin]
+    active = params[:active_only]
+    not_active = params[:not_active]
+
     if @pesquisa
       search = '%' + @pesquisa + '%'
       @users = @users.where("nome ILIKE ? OR email ILIKE ?", search, search)
+    end
+    if admin_only
+      @users = @users.where(is_admin: true)
+    end
+    if not_admin
+      @users = @users.where(is_admin: false)
+    end
+    if active
+      @users = @users.where(is_active: true)
+    end
+    if not_active
+      @users = @users.where(is_active: false)
     end
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    admin_control
   end
 
   # GET /users/new
@@ -46,7 +62,10 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
+    respond_to do |format|  def user_details
+      admin_control
+      puts @user
+    end
       if @user.update(user_params)
         @user.telefone = @user.telefone.gsub(/\D/, '')
         @user.save
@@ -75,7 +94,7 @@ class UsersController < ApplicationController
 
   ###################### ADMIN ###################### 
   def admin_control
-    if !@user.is_admin
+    if !current_user || !current_user.is_admin
       redirect_to root_path
     end
   end
@@ -91,6 +110,11 @@ class UsersController < ApplicationController
     @user.is_active = !@user.is_active
     @user.save
     redirect_back fallback_location: root_path
+  end
+
+  def user_details
+    admin_control
+    puts @user
   end
 
   private

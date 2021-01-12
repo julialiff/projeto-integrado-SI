@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   get 'area-admin/categorias', to: 'categories#index'
   get 'area-admin/historico-de-vendas', to: 'orders#index'
   get 'area-admin/produtos', to: 'products#index'
-  get 'area-admin/usuario', to: 'users#show'
+  get 'area-admin/usuario', to: 'users#user_details'
 
   get 'activate_deactivate', to: 'users#deactivate'
   get 'area-admin/categorias/activate_deactivate', to: 'categories#activate_deactivate'

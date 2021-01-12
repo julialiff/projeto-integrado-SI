@@ -38,4 +38,8 @@ module ApplicationHelper
     # Retorna a quantidade de pedidos feita por um determinado usuário
     Order.where(user_id: user_id).count
   end
+
+  def diminui_nome(nome)
+    nome.length > 15 ? "#{nome[0..15]}..." : nome
+  end
 end

@@ -42,19 +42,19 @@
             </th>
 
             <th scope="col">
-            <% if params['filter'] == 'quantidade' && params['order'] == 'asc' %>
-              <%= link_to  area_admin_produtos_path(filter:"quantidade", order:"desc", nome_produto: @nome_produto) do %>
-                <i class="fas fa-chevron-up fa-sm mx-0"></i>
-                Qtd
+              <% if params['filter'] == 'quantidade' && params['order'] == 'asc' %>
+                <%= link_to  area_admin_produtos_path(filter:"quantidade", order:"desc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-up fa-sm mx-0"></i>
+                  Qtd
+                <% end %>
+              <% elsif params['filter'] == 'quantidade' && params['order'] == 'desc' %>
+                <%= link_to area_admin_produtos_path(filter:"quantidade", order:"asc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-down fa-sm mx-0"></i>
+                  Qtd
+                <% end %>
+              <% else %>
+                <%= link_to "Qtd", area_admin_produtos_path(filter:"quantidade", order:"asc", nome_produto: @nome_produto) %>
               <% end %>
-            <% elsif params['filter'] == 'quantidade' && params['order'] == 'desc' %>
-              <%= link_to area_admin_produtos_path(filter:"quantidade", order:"asc", nome_produto: @nome_produto) do %>
-                <i class="fas fa-chevron-down fa-sm mx-0"></i>
-                Qtd
-              <% end %>
-            <% else %>
-              <%= link_to "Qtd", area_admin_produtos_path(filter:"quantidade", order:"asc", nome_produto: @nome_produto) %>
-            <% end %>
             </th>
 
             <th scope="col">
@@ -94,10 +94,7 @@
                 <% end %>
               </td>
               <td>
-                <% if product.nome.length > 15 %>
-                 <% product.nome = product.nome[0..15] + '...' %>
-                <% end %>
-                <%= link_to product.nome, product %>
+                <%= link_to diminui_nome(product.nome), product %>
               </td>
               <td><%= product.quantidade %></td>
               <td><%= product.preco %></td>

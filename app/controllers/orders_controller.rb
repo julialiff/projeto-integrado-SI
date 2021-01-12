@@ -149,6 +149,35 @@ class OrdersController < ApplicationController
     end
   end
 
+  def orders_comerciante
+    if !current_comerciante
+      redirect_to root_path
+    end
+    product_ids = Product.where(comerciante: current_comerciante).ids
+    @orders = Order.where(product_id: product_ids).order(created_at: :desc)
+    @email_cliente = params[:email_cliente] ? params[:email_cliente] : ""
+    @numero_pedido = params[:numero_pedido] ? params[:numero_pedido] : ""
+    @total = 0
+    if @email_cliente && !@email_cliente.empty?
+      cliente = User.find_by(email: @email_cliente)
+      @orders = @orders.where(user: cliente).order(created_at: :desc)
+    end
+    if @numero_pedido && !@numero_pedido.empty?
+      @orders = @orders.where(numero_pedido: @numero_pedido)
+    end
+  end
+
+  def detalhe_comerciante
+    if !params[:numero_pedido]
+      redirect_back fallback_location root_path
+    end
+    @numero_pedido = params[:numero_pedido]
+    @itens_pedido = Order.where(numero_pedido: @numero_pedido)
+    @buyer = @itens_pedido.first.user
+    @endereco = @itens_pedido.first.endereco
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order

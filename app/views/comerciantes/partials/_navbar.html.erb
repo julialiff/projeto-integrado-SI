@@ -13,7 +13,7 @@
     <% else %>
       <%= link_to "Editar cadastro", vendedor_editar_cadastro_path, class:"nav-link" %>
     <% end %>
-    
+
   </li>
 
   <li class="nav-item">
@@ -25,6 +25,10 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="#">Histórico de Pedidos</a>
+  <% if request.env['PATH_INFO'].include?("/vendedor/historico-pedidos") || request.env['PATH_INFO'].include?('vendedor/pedido') %>
+    <span class="nav-link active">Histórico de pedidos</span>
+  <% else %>
+    <%= link_to "Histórico de pedidos", vendedor_historico_pedidos_path, class:"nav-link" %>
+  <% end %>
   </li>
 </ul>

@@ -1,7 +1,7 @@
 <div class="container form-box dados-usuario-container">
   <div class="row justify-content-center">
     <div class="col col-8 align-self-center">
-      <%= render partial: "users/partials/admin_navbar" %>
+      <%= render partial: "comerciantes/partials/navbar" %>
       <br />
     </div>
   </div>
@@ -25,10 +25,19 @@
           <table class="table border border-rounded" style="width:100%;">
             <tr>
               <td>
-                Comprado por: <strong><%= link_to @buyer.nome, area_admin_usuario_path(id: @buyer.id) %></strong>
+                Comprado por: <strong><%= @buyer.nome %></strong>
               </td>
               <td>
                 Pedido feito em: <strong><%= @itens_pedido.first.created_at %></strong>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Email para contato: <strong><%= @buyer.email %></strong>
+              </td>
+              <td>
+                Telefone para contato: <strong><%= phone_mask(@buyer.telefone) %></strong>
               </td>
             </tr>
 
@@ -44,8 +53,10 @@
             <tr>
               <td colspan="2">Items do pedido:</td>
             </tr>
-
+            <% @total = 0 %>
             <% @itens_pedido.each do |pedido| %>
+              <% if pedido.product.comerciante == current_comerciante %>
+                <% @total = @total + (pedido.product.preco * pedido.quantidade) %>
                 <tr>
                   <td colspan="2">
                     <div class="row justify-content-center">
@@ -68,8 +79,14 @@
                     </div>
                   </td>
                 </tr>
+              <% end %>
             <% end %>
-
+            <tr>
+              <td></td>
+              <td style="text-align:right;font-size:16px;">
+                Total do pedido: <strong class="preco">R$ <%= "%.2f" % @total %></strong>
+              </td>
+            </tr>
           </table>
         </div>
       </div>

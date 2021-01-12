@@ -1,13 +1,13 @@
 <div class="container form-box dados-usuario-container">
   <div class="row justify-content-center">
-    <div class="col col-6 align-self-center">
+    <div class="col col-8 align-self-center">
       <%= render partial: "comerciantes/partials/navbar" %>
       <br />
     </div>
   </div>
 
   <div class="row justify-content-center" style="margin-bottom:20px;">
-    <div class="col col-4 align-self-center">
+    <div class="col col-6 align-self-center">
       <h4>Meus produtos</h4>
     </div>
     <div class="col col-2 align-self-center">
@@ -17,15 +17,65 @@
   </div>
 
   <div class="row justify-content-center" style="margin-bottom:20px;">
-    <div class="col col-6 align-self-center">
+    <div class="col col-8 align-self-center">
+      <%= render partial: "products/partials/vendedor_search" %>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" style="margin-bottom:20px;">
+    <div class="col col-8 align-self-center">
 
       <table class="table" style="font-size:14px;">
         <thead>
           <tr>
             <th scope="col">Imagem</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Qtd</th>
-            <th scope="col">Preço</th>
+            <th scope="col">
+              <% if params['filter'] == 'nome' && params['order'] == 'asc' %>
+                <%= link_to  vendedor_meus_produtos_path(filter:"nome", order:"desc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-up fa-sm mx-0"></i>
+                  Nome
+                <% end %>
+              <% elsif params['filter'] == 'nome' && params['order'] == 'desc' %>
+                <%= link_to vendedor_meus_produtos_path(filter:"nome", order:"asc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-down fa-sm mx-0"></i>
+                  Nome
+                <% end %>
+              <% else %>
+                <%= link_to "Nome", vendedor_meus_produtos_path(filter:"nome", order:"asc", nome_produto: @nome_produto) %>
+              <% end %>
+            </th>
+
+            <th scope="col">
+              <% if params['filter'] == 'quantidade' && params['order'] == 'asc' %>
+                <%= link_to  vendedor_meus_produtos_path(filter:"quantidade", order:"desc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-up fa-sm mx-0"></i>
+                  Qtd
+                <% end %>
+              <% elsif params['filter'] == 'quantidade' && params['order'] == 'desc' %>
+                <%= link_to vendedor_meus_produtos_path(filter:"quantidade", order:"asc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-down fa-sm mx-0"></i>
+                  Qtd
+                <% end %>
+              <% else %>
+                <%= link_to "Qtd", vendedor_meus_produtos_path(filter:"quantidade", order:"asc", nome_produto: @nome_produto) %>
+              <% end %>
+            </th>
+
+            <th scope="col">
+              <% if params['filter'] == 'preco' && params['order'] == 'asc' %>
+                <%= link_to  vendedor_meus_produtos_path(filter:"preco", order:"desc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-up fa-sm mx-0"></i>
+                  Preço
+                <% end %>
+              <% elsif params['filter'] == 'preco' && params['order'] == 'desc' %>
+                <%= link_to vendedor_meus_produtos_path(filter:"preco", order:"asc", nome_produto: @nome_produto) do %>
+                  <i class="fas fa-chevron-down fa-sm mx-0"></i>
+                  Preço
+                <% end %>
+              <% else %>
+                <%= link_to "Preço", vendedor_meus_produtos_path(filter:"preco", order:"asc", nome_produto: @nome_produto) %>
+              <% end %>
+            </th>
             <th scope="col">Categoria</th>
             <th colspan="2"></th>
           </tr>
@@ -41,12 +91,12 @@
                   <i class="fas fa-image" style="font-size: 48px; color:#bfbfbf"></i>
                 <% end %>
               </td>
-              <td><%= link_to product.nome, product %></td>
+              <td><%= link_to diminui_nome(product.nome), product %></td>
               <td><%= product.quantidade %></td>
               <td><%= product.preco %></td>
               <td><%= product.category.nome %></td>
               <td><%= link_to "Editar", vendedor_editar_produto_path(id: product.id) %></td>
-              <td>Acompanhar Vendas</td>
+              <td>Ver pedidos</td>
             </tr>
           <% end %>
         </tbody>

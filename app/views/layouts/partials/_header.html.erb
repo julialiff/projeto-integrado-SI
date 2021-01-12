@@ -10,7 +10,7 @@
       </a>
       <% fetch_categories() %>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        
+
         <% @categories_header.each do |cat| %>
           <a class="dropdown-item" href="#"><%= cat.nome %></a>
         <% end %>
@@ -31,7 +31,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Minha conta
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <%= link_to dados_cadastrais_path() , class: "dropdown-item" do %>
             <i class="fas fa-user-cog fa-sm mx-2"></i>
             Configurações
@@ -46,7 +46,7 @@
 
           <% if current_user.is_admin%>
             <%= link_to area_admin_usuarios_path, class: "dropdown-item" do %>
-              <i class="fas fa-lock fa-sm mx-2"></i>  
+              <i class="fas fa-lock fa-sm mx-2"></i>
               Área do Admin
             <% end %>
           <% end %>
@@ -58,15 +58,15 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Minha conta
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">          
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <%= link_to vendedor_dados_cadastrais_path() , class: "dropdown-item" do %>
             <i class="fas fa-user-cog fa-sm mx-2"></i>
             Configurações
           <% end %>
-          <a class="dropdown-item" href="#">
+          <%= link_to vendedor_meus_produtos_path, class: "dropdown-item" do %>
             <i class="fas fa-box-open fa-sm mx-2"></i>
             Meus produtos
-          </a>
+          <% end %>
           <%= link_to destroy_user_session_path, :method => :delete, class: "dropdown-item" do %>
             <i class="fas fa-sign-out-alt fa-sm mx-2"></i> Sair
           <% end %>

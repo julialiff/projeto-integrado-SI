@@ -36,8 +36,24 @@
               <td>Documento: <strong><%= @comerciante.documento %></strong></td>
               <td>Data de criação: <strong><%= @comerciante.created_at %></strong></td>
             </tr>
-            # TODO opção para ativar/desativar. Link para os produtos deste vendedor
-
+            <tr>
+              <td>
+                <%= link_to area_admin_produtos_path(comerciante_id:@comerciante.id) do %>
+                  (<%= qtd_produtos(@comerciante.id) %>) <%= qtd_produtos(@comerciante.id) > 1 ? "Produtos" : "Produto" %>
+                <% end %>
+              </td>
+              <td>
+                <% if @comerciante.is_active %>
+                  <%= link_to area_admin_vendedores_activate_deactivate_path(id: @comerciante), data: { confirm: "Tem certeza de que deseja desativar a conta de #{@comerciante.email}?" }, class: 'btn btn-outline-danger btn-block btn-sm' do %>
+                    <i class="fas fa-times fa-sm mx-0"></i> Desativar
+                  <% end %>
+                <% else %>
+                  <%= link_to area_admin_vendedores_activate_deactivate_path(id: @comerciante), data: { confirm: "Tem certeza de que deseja ativar a conta de #{@comerciante.email}?" }, class: 'btn btn-outline-success btn-block btn-sm' do %>
+                    <i class="fas fa-times fa-sm mx-0"></i> Ativar
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
           </table>
         </div>
       </div>

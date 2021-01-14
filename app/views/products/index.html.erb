@@ -1,34 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- <title>vitrine</title> -->
+    <%= stylesheet_link_tag 'welcome.scss' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Products</h1>
+<h1>Busca de Productos</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Category</th>
-      <th>Descricao</th>
-      <th>Quantidade</th>
-      <th>  preco</th>
-      <th>Comerciante</th>
-      <th>Foto</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+
 
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= product.nome %></td>
-        <td><%= product.category %></td>
-        <td><%= product.descricao %></td>
-        <td><%= product.quantidade %></td>
-        <td><%= product.preco %></td>
-        <td><%= product.comerciante %></td>
-        <td><%= product.foto %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td style="line-height: 20px; padding-bottom: 30px;">
+		<% if product.foto.attached? %>
+		  <img src="<%=(url_for(product.foto))%>" style="width:200px;">
+		<% else %>
+		  <i class="fas fa-image" style="font-size: 200px; color:#bfbfbf"></i>
+		<% end %>
+	</td>
+        <td style="padding-left: 30px; line-height: 22px;">Nome: <%= product.nome %><br>
+        Categoria: <%= @categories[product.category_id] %><br>
+        Descrição: <%= product.descricao %><br>
+        Quantidade: <%= product.quantidade %><br>
+        Preço: R$<%= product.preco %><br>
+        Vendedor: <%= @comerciante[product.comerciante_id] %><br></td>
+
+
       </tr>
     <% end %>
   </tbody>
@@ -36,4 +40,3 @@
 
 <br>
 
-<%= link_to 'New Product', new_product_path %>

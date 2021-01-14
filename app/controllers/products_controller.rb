@@ -1,11 +1,14 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.search(params[:search])
+    @categories = Category.all.pluck(:id, :nome).to_h
+    @comerciante = Comerciante.all.pluck(:id, :nome).to_h
   end
+  
+
 
   # GET /products/1
   # GET /products/1.json
@@ -73,6 +76,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:nome, :category_id, :descricao, :quantidade, :preco, :comerciante_id, :foto)
+      params.require(:product).permit(:nome, :category_id, :descricao, :quantidade, :preco, :comerciante_id, :foto, :search)
     end
 end

@@ -9,7 +9,7 @@ RSpec.describe User do
             email: "fulano@example.com",
             documento: "12345678910", 
             data_nascimento: Date.today(), 
-            endereco: "Rua etc de tal, 123"
+            #endereco: "Rua etc de tal, 123"
         )
         users_qtt_new = User.all.length()
 
@@ -25,7 +25,7 @@ RSpec.describe User do
             email: "fulano@example.com",
             documento: "12345678910", 
             data_nascimento: Date.today(), 
-            endereco: "Rua etc de tal, 123"
+            #endereco: "Rua etc de tal, 123"
         )
 
         user_before = user
@@ -35,7 +35,7 @@ RSpec.describe User do
             email: "fulano_alt@example.com",
             documento: "12345678910", 
             data_nascimento: Date.yesterday(), 
-            endereco: "Rua etc de tal, 1234"
+            #endereco: "Rua etc de tal, 1234"
         )
         
         !(user.equal? user_before)

@@ -9,95 +9,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
-
+<body data-new-gr-c-s-check-loaded='14.991.0' data-gr-ext-installed>
+	<div>
+		<div class="row justify-content-center" style="margin-bottom:20px;">
+		<div class="col col-8 align-self-center">
+		<%= render partial: "products/partials/search" %>
+		</div>
+  </div>
+	</div>
     
  <!-- Vitrine -->
     <div class="small-container">
         <h2 class="title"> Vitrine </h2>
-        <div class="row">
-            <div class="col-3">
-                <%= image_tag("mascara1.jpg") %>
-                <h4>Mascara 1</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-
-                </div>
-                <p>R$15.00</p>
-            </div>
-            <div class="col-3">
-                <%= image_tag("mascara2.jpg") %>
-                <h4>Mascara 2</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                    <i class="fa fa-star-o"></i>
-
-                </div>
-                <p>R$10.00</p>
-            </div>
-            <div class="col-3">
-                <%= image_tag("mascara3.jpg") %>
-                <h4>Mascara 3</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-
-                </div>
-                <p>R$250.00</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <%= image_tag("alcoholGel1.jpg") %>
-                <h4>Alcohol Gel 1</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-
-                </div>
-                <p>R$12.34</p>
-            </div>
-            <div class="col-3">
-                <%= image_tag("alcoholGel2.jpg") %>
-                <h4>Alcohol Gel 2</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-
-                </div>
-                <p>R$19.99</p>
-            </div>
-            <div class="col-3">
-                <%= image_tag("alcoholGel3.jpg") %>
-                <h4>Alcohol Gel 3</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-
-                </div>
-                <p>R$13.00</p>
-            </div>
-        </div>
     </div>
-            
+
+	
+	<table>
+		<tbody>
+			<% @products.each do |product| %>
+			<tr>
+				<td style="line-height: 20px; padding-bottom: 30px;">
+					<% if product.foto.attached? %>
+					  <img src="<%=(url_for(product.foto))%>" style="width:200px;">
+					<% else %>
+					  <i class="fas fa-image" style="font-size: 200px; color:#bfbfbf"></i>
+					<% end %>
+				</td>
+				<td style="padding-left: 30px; line-height: 22px;">
+					Nome: <%= product.nome %><br>
+					Categoria: <%= @categories[product.category_id] %><br>
+					Descrição: <%= product.descricao %><br>
+					Quantidade: <%= product.quantidade %><br>
+					Preço: R$<%= product.preco %><br>
+					Vendedor: <%= @comerciante[product.comerciante_id] %><br>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
 </body>
 </html>

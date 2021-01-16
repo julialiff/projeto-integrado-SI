@@ -5,10 +5,15 @@
       <%= text_field_tag(:nome_produto, params[:nome_produto], class: 'form-control', placeholder: 'Nome do produto', autofocus: true) %>
     </td>
     <td style="padding-right:20px;">
-      <%= select_tag :category_id, options_for_select(@categories.collect { |c| [c.nome, c.id] }, @category_id), {class: "form-control", prompt: "Selecione uma categoria..."} %>
+ 
+	<%= select_tag :category_id, options_for_select(@categories.collect { |c| [c.nome, c.id] }, @category_id), {class: "form-control", prompt: "Selecione uma categoria..."} %>
+
     </td>
+
     <td style="padding-right:20px;">
+
       <%= select_tag :comerciante_id, options_for_select(@comerciantes.collect { |c| [c.nome, c.id] }, @comerciante_id), {class: "form-control", prompt: "Selecione um vendedor..."} %>
+
     </td>
     <td style="padding-right:20px;">
       <%= hidden_field_tag :order, @order %>
